@@ -36,6 +36,7 @@ public class Mom {
 
             }
         }
+        scan.close();
 
         System.out.println("Bye. See you soon!");
     }
