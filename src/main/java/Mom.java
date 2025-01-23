@@ -15,7 +15,7 @@ public class Mom {
         Scanner scan = new Scanner(System.in);
         String input = "";
 
-        while(true) {
+        while (true) {
             input = scan.nextLine();
             String[] inputList = input.split(" ");
             int offset = inputList[0].length() + 1;
@@ -32,7 +32,12 @@ public class Mom {
                 Mom.unmarkTask(input, offset);
 
             } else {
-                addTask(input, inputList);
+
+                try {
+                    addTask(input, inputList);
+                } catch (Exception e) {
+                    System.out.println(e.toString());
+                }
 
             }
         }
@@ -52,22 +57,36 @@ public class Mom {
         System.out.println(divider + "\n");
     }
 
-    public static void addTask(String input, String[] inputList) {
+    public static void addTask(String input, String[] inputList) throws InvalidInputException {
         int offset = inputList[0].length() + 1;
-        if (inputList[0].equals("todo")) {
-            taskList[taskIndex] = new Todo(input.substring(offset));
+        switch (inputList[0]) {
+            case "todo": {
+                if (inputList.length == 1) {
+                    throw new InvalidInputException("A 'todo' task requires a task description. " +
+                            "Please include a valid description");
+                }
 
-        } else if (inputList[0].equals("deadline")) {
-            String[] params = input.split(" /by ");
-            String by = params[1];
-            taskList[taskIndex] = new Deadline(params[0].substring(offset), by);
-        } else {
-            String[] params = input.split(" /from ");
-            String[] startEnd = params[1].split("/to");
-            String from = startEnd[0];
-            String to = startEnd[1];
-            taskList[taskIndex] = new Event(params[0].substring(offset), from, to);
+                taskList[taskIndex] = new Todo(input.substring(offset));
+                break;
+            }
+            case "deadline": {
+                String[] params = input.split(" /by ");
+                String by = params[1];
+                taskList[taskIndex] = new Deadline(params[0].substring(offset), by);
+                break;
+            }
+            case "event": {
+                String[] params = input.split(" /from ");
+                String[] startEnd = params[1].split("/to");
+                String from = startEnd[0];
+                String to = startEnd[1];
+                taskList[taskIndex] = new Event(params[0].substring(offset), from, to);
+                break;
+            }
+            default: {
+                throw new InvalidInputException("Please enter a valid command.");
 
+            }
         }
 
         System.out.println(divider);
