@@ -1,16 +1,19 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Mom {
-    static String chatbotName = "Mom";
-    static String divider = "--------------------------------------------------";
-    static Task[] taskList = new Task[100];
+    static String CHATBOT_NAME = "Mom";
+    static String DIVIDER = "--------------------------------------------------";
+    static ArrayList<Task> taskList = new ArrayList<Task>(100);
     static int taskIndex = 0;
+
+
 
     public static void main(String[] args) {
 
-        System.out.println("Hi, I'm " + chatbotName);
+        System.out.println("Hi, I'm " + CHATBOT_NAME);
         System.out.println("What can I do for you?");
-        System.out.println(divider + "\n");
+        System.out.println(DIVIDER + "\n");
 
         Scanner scan = new Scanner(System.in);
         String input = "";
@@ -31,6 +34,10 @@ public class Mom {
             } else if (inputList[0].equals("unmark")) {
                 Mom.unmarkTask(input, offset);
 
+            } else if (inputList[0].equals("delete")) {
+                int rank = Integer.parseInt(inputList[1]);
+                Mom.deleteTask(rank);
+
             } else {
 
                 try {
@@ -47,14 +54,15 @@ public class Mom {
     }
 
     public static void listTasks() {
-        System.out.println(divider);
+        System.out.println(DIVIDER);
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskIndex; i++) {
+        for (int i = 0; i < taskList.size() ; i++) {
             int listIndex = i + 1;
             System.out.println(listIndex + "."
-                    + taskList[i].toString());
+                    + (taskList.get(i).toString()));
         }
-        System.out.println(divider + "\n");
+
+        System.out.println(DIVIDER + "\n");
     }
 
     public static void addTask(String input, String[] inputList) throws InvalidInputException {
@@ -66,13 +74,13 @@ public class Mom {
                             "Please include a valid description");
                 }
 
-                taskList[taskIndex] = new Todo(input.substring(offset));
+                taskList.add(new Todo(input.substring(offset)));
                 break;
             }
             case "deadline": {
                 String[] params = input.split(" /by ");
                 String by = params[1];
-                taskList[taskIndex] = new Deadline(params[0].substring(offset), by);
+                taskList.add(new Deadline(params[0].substring(offset), by));
                 break;
             }
             case "event": {
@@ -80,7 +88,7 @@ public class Mom {
                 String[] startEnd = params[1].split("/to");
                 String from = startEnd[0];
                 String to = startEnd[1];
-                taskList[taskIndex] = new Event(params[0].substring(offset), from, to);
+                taskList.add(new Event(params[0].substring(offset), from, to));
                 break;
             }
             default: {
@@ -89,23 +97,23 @@ public class Mom {
             }
         }
 
-        System.out.println(divider);
+        System.out.println(DIVIDER);
         System.out.println("Got it. I've added this task:");
-        System.out.println("    " + taskList[taskIndex].toString());
-        System.out.println("Now you have " + (taskIndex + 1) + " tasks in the list.");
-        System.out.println(divider + "\n");
+        System.out.println("    " + taskList.get(taskList.size() - 1).toString());
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println(DIVIDER + "\n");
         taskIndex++;
     }
 
     public static void markTask(String input, int offset) {
         for (int i = 0; i < taskIndex; i++) {
-            if (taskList[i].getDescription().equals(input.substring(offset))) {
-                taskList[i].mark();
+            if (taskList.get(i).getDescription().equals(input.substring(offset))) {
+                taskList.get(i).mark();
 
-                System.out.println(divider);
+                System.out.println(DIVIDER);
                 System.out.println("Nice! I've marked this task as done.");
-                System.out.println("    " + taskList[i].toString());
-                System.out.println(divider + "\n");
+                System.out.println("    " + taskList.get(i).toString());
+                System.out.println(DIVIDER + "\n");
                 break;
             }
         }
@@ -113,15 +121,25 @@ public class Mom {
 
     public static void unmarkTask(String input, int offset) {
         for (int i = 0; i < taskIndex; i++) {
-            if (taskList[i].getDescription().equals(input.substring(offset))) {
-                taskList[i].unmark();
+            if (taskList.get(i).getDescription().equals(input.substring(offset))) {
+                taskList.get(i).unmark();
 
-                System.out.println(divider);
+                System.out.println(DIVIDER);
                 System.out.println("Okay, I've unmarked this task as incomplete.");
-                System.out.println("    " + taskList[i].toString());
-                System.out.println(divider + "\n");
+                System.out.println("    " + taskList.get(i).toString());
+                System.out.println(DIVIDER + "\n");
                 break;
             }
         }
     }
+
+    public static void deleteTask(int rank) {
+        System.out.println(DIVIDER);
+        System.out.println("Understood, removing the task below:");
+        System.out.println("    " + rank + "." + taskList.get(rank - 1).toString());
+        System.out.println("Now you have " + (taskList.size() - 1) + " tasks in the list.");
+        System.out.println(DIVIDER + "\n");
+        taskList.remove(rank - 1);
+    }
+
 }
