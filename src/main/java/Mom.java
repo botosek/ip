@@ -57,7 +57,7 @@ public class Mom {
         try {
             saveTaskList(TASKLIST_FILEPATH);
         } catch (IOException e) {
-            System.out.println("Something went wrong when saving Task List: " + e.getMessage());
+            System.out.println("Something went wrong when saving Task List: " + e.toString());
         }
 
         System.out.println("Bye. See you soon!");
