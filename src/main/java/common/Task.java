@@ -1,3 +1,5 @@
+package common;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -7,9 +9,16 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public Task(String description, String status) {
+        this.description = description;
+        this.isDone = status.equals("1");
+    }
+
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]"); // mark done task with X
     }
+
+    public String getStatus() { return (isDone? "1" : "0"); }
 
     public String getDescription() {
         return this.description;
@@ -26,5 +35,7 @@ public abstract class Task {
     public String toString() {
         return this.getStatusIcon() + " " + this.getDescription();
     }
+
+    public abstract String toSaveString();
 }
 

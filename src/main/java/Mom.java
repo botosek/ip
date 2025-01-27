@@ -1,10 +1,20 @@
+import common.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Mom {
-    static String CHATBOT_NAME = "Mom";
-    static String DIVIDER = "--------------------------------------------------";
-    static ArrayList<Task> taskList = new ArrayList<Task>(100);
+    private static final String TASKLIST_FILEPATH = "." + File.separator + "src" + File.separator + "main"
+            + File.separator + "java" + File.separator + "data" + File.separator + "mom.txt";
+    private static final String CHATBOT_NAME = "Mom";
+    private static final String DIVIDER = "--------------------------------------------------";
+
+    private static final ArrayList<Task> taskList = new ArrayList<Task>(100);
 
 
     public static void main(String[] args) {
@@ -12,6 +22,13 @@ public class Mom {
         System.out.println("Hi, I'm " + CHATBOT_NAME);
         System.out.println("What can I do for you?");
         System.out.println(DIVIDER + "\n");
+
+        try {
+            loadTaskList(TASKLIST_FILEPATH);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
 
         Scanner scan = new Scanner(System.in);
         String input = "";
@@ -32,14 +49,16 @@ public class Mom {
                 } else {
                     handleTaskCommand(command, input, inputList, offset);
                 }
-
             } catch (InvalidInputException e) {
                 System.out.println(e.toString());
             }
-
-
         }
-        scan.close();
+
+        try {
+            saveTaskList(TASKLIST_FILEPATH);
+        } catch (IOException e) {
+            System.out.println("Something went wrong when saving Task List: " + e.toString());
+        }
 
         System.out.println("Bye. See you soon!");
     }
@@ -137,7 +156,7 @@ public class Mom {
             case todo: {
                 if (input.split(" ").length == 1) {
                     throw new InvalidInputException("A 'todo' task requires a task description. " +
-                            "Please include a valid description");
+                            "Please include a valid description.");
                 }
 
                 taskList.add(new Todo(input.substring(offset)));
@@ -170,4 +189,66 @@ public class Mom {
         System.out.println(DIVIDER + "\n");
     }
 
+    public static void loadTaskList(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNextLine()) {
+            String entry = s.nextLine();
+
+            try {
+                if (!entry.contains("|")) {
+                    throw new CorruptedFileException("Entry in file not properly formatted:\n" + entry);
+                }
+
+                String[] entryList = entry.split(" \\| ");
+
+                if (!entryList[1].equals("1") && !entryList[1].equals("0")) {
+                    throw new CorruptedFileException("Status of entry not properly documented:\n" + entry);
+                }
+
+                handleFileEntries(entryList, entry);
+            } catch (CorruptedFileException e) {
+                System.out.println(e.toString());
+            }
+        }
+        s.close();
+    }
+
+    public static void handleFileEntries(String[] entryList, String entry) throws CorruptedFileException {
+
+        switch (entryList[0]) {
+            case "T": {
+                taskList.add(new Todo(entryList[2], entryList[1]));
+                break;
+            }
+            case "D": {
+                taskList.add(new Deadline(entryList[2], entryList[1], entryList[3]));
+                break;
+            }
+            case "E": {
+                if (!entryList[3].contains("-")) {
+                    throw new CorruptedFileException("Time entry in file not properly formatted:\n" + entry);
+                }
+                String[] startEnd = entryList[3].split("-");
+                String from = startEnd[0];
+                String to = startEnd[1];
+
+                taskList.add(new Event(entryList[2], entryList[1], from, to));
+                break;
+            }
+            default: {
+                throw new CorruptedFileException("No valid command found for an entry:\n" + entry);
+            }
+        }
+    }
+
+    public static void saveTaskList(String filePath) throws IOException {
+        File f = new File(filePath);
+        FileWriter fw = new FileWriter(f);
+        for (int i = 0; i < taskList.size() - 1; i++) {
+            fw.write(taskList.get(i).toSaveString() + "\n");
+        }
+        fw.write(taskList.get(taskList.size() - 1).toSaveString());
+        fw.close();
+    }
 }
