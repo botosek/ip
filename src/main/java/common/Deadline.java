@@ -1,14 +1,19 @@
 package common;
 
-public class Deadline extends Task {
-    protected String by;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    private static final DateTimeFormatter DATETIME_PRINT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private static final DateTimeFormatter DATETIME_SAVE= DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    protected LocalDateTime by;
+
+    public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
-    public Deadline(String description, String status, String by) {
+    public Deadline(String description, String status, LocalDateTime by) {
         super(description, status);
         this.by = by;
     }
@@ -16,13 +21,13 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + by + ")";
+                + " (by:" + by.format(DATETIME_PRINT) + ")";
     }
 
     public String toSaveString() {
         return "D"
             + " | " + this.getStatus()
             + " | " + this.getDescription()
-            + " | " + this.by;
+            + " | " + this.by.format(DATETIME_SAVE);
     }
 }

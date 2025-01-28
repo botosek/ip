@@ -1,4 +1,6 @@
 T | 1 | read book
-D | 0 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2-4pm
+D | 0 | return book | 6/6/2025 0000
+E | 0 | project meeting | 6/6/2025 1400-7/6/2025 1500
 T | 1 | join sports club
+D | 0 | eat | 12/6/2025 0000
+E | 1 | help bob | 3/12/2025 1400-10/1/2026 0000
