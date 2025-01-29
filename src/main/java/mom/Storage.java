@@ -1,4 +1,7 @@
-import common.*;
+package mom;
+
+import mom.exceptions.CorruptedFileException;
+import mom.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

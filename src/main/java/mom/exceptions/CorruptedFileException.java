@@ -1,3 +1,5 @@
+package mom.exceptions;
+
 public class CorruptedFileException extends Exception {
     public CorruptedFileException(String errorMessage) {
         super(errorMessage);
