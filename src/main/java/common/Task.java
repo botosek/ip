@@ -1,8 +1,7 @@
 package common;
 
-import java.time.format.DateTimeFormatter;
 
-public abstract class Task {
+public class Task {
     protected String description;
     protected boolean isDone;
 
@@ -39,8 +38,13 @@ public abstract class Task {
         return this.getStatusIcon() + " " + this.getDescription();
     }
 
-    public abstract String toSaveString();
+    public String toSaveString() {
+        return this.getStatusIcon() + " " + this.getDescription();
+    }
 
+    public boolean isEmpty() {
+        return this.getDescription().isEmpty();
+    }
 
 }
 
