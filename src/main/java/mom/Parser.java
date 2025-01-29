@@ -1,4 +1,8 @@
-import common.Command;
+package mom;
+
+import mom.command.Command;
+import mom.exceptions.CorruptedFileException;
+import mom.exceptions.InvalidInputException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -54,7 +58,7 @@ public interface Parser {
         throw new InvalidInputException("Invalid date format: " + date);
     }
 
-    static String parseEntryTodo(String entry, int offset) throws InvalidInputException{
+    static String parseEntryTodo(String entry, int offset) throws InvalidInputException {
         if (entry.split(" ").length == 1) {
             throw new InvalidInputException("A 'todo' task requires a task description. " +
                     "Please include a valid description.");
@@ -62,14 +66,14 @@ public interface Parser {
         return entry.substring(offset);
     }
 
-    static Object[] parseEntryDeadline(String entry, int offset) throws InvalidInputException{
+    static Object[] parseEntryDeadline(String entry, int offset) throws InvalidInputException {
         String[] params = entry.split(" /by ");
         String by = params[1];
         LocalDateTime byDateTime = Parser.parseDate(by);
         return new Object[]{params[0].substring(offset), byDateTime};
     }
 
-    static Object[] parseEntryEvent(String entry, int offset) throws InvalidInputException{
+    static Object[] parseEntryEvent(String entry, int offset) throws InvalidInputException {
         String[] params = entry.split(" /from ");
         String[] startEnd = params[1].split(" /to ");
         String from = startEnd[0];
@@ -80,7 +84,7 @@ public interface Parser {
         return new Object[]{params[0].substring(offset), fromDateTime, toDateTime};
     }
 
-    static String[] parseLoadTask(String entry) throws CorruptedFileException{
+    static String[] parseLoadTask(String entry) throws CorruptedFileException {
         if (!entry.contains("|")) {
             throw new CorruptedFileException("Entry in file not properly formatted:\n" + entry);
         }
@@ -94,7 +98,7 @@ public interface Parser {
         return entryList;
     }
 
-    static Object[] parseLoadDeadline(String[] entryList, String entry) throws CorruptedFileException{
+    static Object[] parseLoadDeadline(String[] entryList, String entry) throws CorruptedFileException {
         try {
             LocalDateTime byDateTime = Parser.parseDate(entryList[3]);
             return new Object[]{entryList[2], entryList[1], byDateTime};
@@ -103,7 +107,7 @@ public interface Parser {
         }
     }
 
-    static Object[] parseLoadEvent(String[] entryList, String entry) throws CorruptedFileException{
+    static Object[] parseLoadEvent(String[] entryList, String entry) throws CorruptedFileException {
         if (!entryList[3].contains("-")) {
             throw new CorruptedFileException("Time entry in file not properly formatted:\n" + entry);
         }
