@@ -11,9 +11,9 @@ public class Mom implements Parser{
             + File.separator + "java" + File.separator + "data" + File.separator + "mom.txt";
     private static final String CHATBOT_NAME = "Mom";
 
-
     private final Storage storage;
     private final Ui ui;
+
     private static TaskList taskList;
 
     public Mom(String filePath) {
