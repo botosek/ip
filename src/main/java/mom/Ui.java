@@ -50,7 +50,7 @@ public class Ui {
         for (int i = 0; i < tasks.size(); i++) {
             int listIndex = i + 1;
             output.append(listIndex).append(". ").append(tasks.get(i).toString());
-            if(listIndex < tasks.size()) {
+            if (listIndex < tasks.size()) {
                 output.append("\n");
             }
         }
@@ -87,6 +87,22 @@ public class Ui {
         display("    " + task.toString());
         display("Now you have " + number + " tasks in the list.");
         display(DIVIDER + "\n");
+    }
+
+    public void displayFind(TaskList taskList, String keyword) {
+        ArrayList<Task> tasks = taskList.getTaskList();
+        display(DIVIDER);
+        StringBuilder output = new StringBuilder();
+        output.append("Here are your tasks with the matching keyword provided:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(keyword)) {
+                int listIndex = i + 1;
+                output.append(listIndex).append(". ").append(tasks.get(i).toString()).append("\n");
+            }
+        }
+        display(output.toString());
+        display(DIVIDER + "\n");
+
     }
 
 }
