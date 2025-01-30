@@ -1,24 +1,20 @@
 package mom;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
 import mom.command.Command;
 import mom.exceptions.CorruptedFileException;
 import mom.exceptions.InvalidInputException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.lang.reflect.Array;
-import java.util.Scanner;
-
 public class Mom implements Parser {
     private static final String TASKLIST_FILEPATH = "data" + File.separator + "mom.txt";
     private static final String CHATBOT_NAME = "Mom";
-
+    private static TaskList taskList;
     private final Storage storage;
     private final Ui ui;
-
-    private static TaskList taskList;
 
     public Mom(String filePath) {
         ui = new Ui(CHATBOT_NAME);
@@ -34,6 +30,10 @@ public class Mom implements Parser {
         } catch (IOException e) {
             Ui.errorDisplay("I/O error:\n" + e);
         }
+    }
+
+    public static void main(String[] args) {
+        new Mom(TASKLIST_FILEPATH).run();
     }
 
     public void run() {
@@ -68,10 +68,6 @@ public class Mom implements Parser {
         }
 
         ui.displayOutro();
-    }
-
-    public static void main(String[] args) {
-        new Mom(TASKLIST_FILEPATH).run();
     }
 
 }

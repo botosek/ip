@@ -1,8 +1,8 @@
 package mom;
 
-import mom.task.*;
-
 import java.util.ArrayList;
+
+import mom.task.Task;
 
 public class Ui {
     private static final String DIVIDER = "--------------------------------------------------";
@@ -11,10 +11,6 @@ public class Ui {
 
     public Ui(String botName) {
         this.botName = botName;
-    }
-
-    public String getBotName() {
-        return botName;
     }
 
     public static void display(String message) {
@@ -27,6 +23,10 @@ public class Ui {
         display(message);
         display(ERROR_DIVIDER);
         display("\n");
+    }
+
+    public String getBotName() {
+        return botName;
     }
 
     public void displayIntro() {
@@ -50,7 +50,7 @@ public class Ui {
         for (int i = 0; i < tasks.size(); i++) {
             int listIndex = i + 1;
             output.append(listIndex).append(". ").append(tasks.get(i).toString());
-            if(listIndex < tasks.size()) {
+            if (listIndex < tasks.size()) {
                 output.append("\n");
             }
         }
