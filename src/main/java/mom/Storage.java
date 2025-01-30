@@ -1,17 +1,17 @@
 package mom;
 
-import mom.exceptions.CorruptedFileException;
-import mom.task.*;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import mom.exceptions.CorruptedFileException;
+import mom.task.Deadline;
+import mom.task.Event;
+import mom.task.Task;
+import mom.task.Todo;
 
 /**
  * Storage class that loads and saves tasklist from hard disk.
@@ -85,30 +85,30 @@ public class Storage implements Parser {
     public void handleFileEntries(String[] entryList, String entry) throws CorruptedFileException {
         String commandString = entryList[0];
         switch (commandString) {
-            case "T": {
-                tasks.add(new Todo(entryList[2], entryList[1]));
-                break;
-            }
-            case "D": {
-                Object[] result = Parser.parseLoadDeadline(entryList, entry);
-                String description = (String) result[0];
-                String status = (String) result[1];
-                LocalDateTime by = (LocalDateTime) result[2];
-                this.tasks.add(new Deadline(description, status, by));
-                break;
-            }
-            case "E": {
-                Object[] result = Parser.parseLoadEvent(entryList, entry);
-                String description = (String) result[0];
-                String status = (String) result[1];
-                LocalDateTime from = (LocalDateTime) result[2];
-                LocalDateTime to = (LocalDateTime) result[3];
-                this.tasks.add(new Event(description, status, from, to));
-                break;
-            }
-            default: {
-                throw new CorruptedFileException("Entry does not contain valid command\n" + entry);
-            }
+        case "T": {
+            tasks.add(new Todo(entryList[2], entryList[1]));
+            break;
+        }
+        case "D": {
+            Object[] result = Parser.parseLoadDeadline(entryList, entry);
+            String description = (String) result[0];
+            String status = (String) result[1];
+            LocalDateTime by = (LocalDateTime) result[2];
+            this.tasks.add(new Deadline(description, status, by));
+            break;
+        }
+        case "E": {
+            Object[] result = Parser.parseLoadEvent(entryList, entry);
+            String description = (String) result[0];
+            String status = (String) result[1];
+            LocalDateTime from = (LocalDateTime) result[2];
+            LocalDateTime to = (LocalDateTime) result[3];
+            this.tasks.add(new Event(description, status, from, to));
+            break;
+        }
+        default: {
+            throw new CorruptedFileException("Entry does not contain valid command\n" + entry);
+        }
         }
     }
 

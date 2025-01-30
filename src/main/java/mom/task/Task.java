@@ -74,9 +74,5 @@ public class Task {
         return this.getStatusIcon() + " " + this.getDescription();
     }
 
-    public boolean isEmpty() {
-        return this.getDescription().isEmpty();
-    }
-
 }
 

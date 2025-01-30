@@ -1,14 +1,13 @@
 package mom;
 
-import mom.command.Command;
-import mom.exceptions.CorruptedFileException;
-import mom.exceptions.InvalidInputException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import java.util.Scanner;
+
+import mom.command.Command;
+import mom.exceptions.CorruptedFileException;
+import mom.exceptions.InvalidInputException;
 
 /**
  * Main class that runs the chatbot "Mom".
@@ -17,16 +16,14 @@ public class Mom implements Parser {
     /** Relative file path of hard disk. */
     private static final String TASKLIST_FILEPATH = "data" + File.separator + "mom.txt";
     private static final String CHATBOT_NAME = "Mom";
-
+    private static TaskList taskList;
     private final Storage storage;
     private final Ui ui;
 
-    private static TaskList taskList;
-
     /**
-     * Creates a Mom object and loads tasklist if there is an existing data/mom.txt file found.
+     * Creates new chatbot Mom object and loads tasklist from hard disk.
      *
-     * @param filePath File path of the task list data/mom.txt file.
+     * @param filePath relative file path of hard disk file.
      */
     public Mom(String filePath) {
         ui = new Ui(CHATBOT_NAME);
@@ -42,6 +39,13 @@ public class Mom implements Parser {
         } catch (IOException e) {
             Ui.errorDisplay("I/O error:\n" + e);
         }
+    }
+
+    /**
+     * Starts the main program.
+     */
+    public static void main(String[] args) {
+        new Mom(TASKLIST_FILEPATH).run();
     }
 
     /**
@@ -79,13 +83,6 @@ public class Mom implements Parser {
         }
 
         ui.displayOutro();
-    }
-
-    /**
-     * Starts the main program.
-     */
-    public static void main(String[] args) {
-        new Mom(TASKLIST_FILEPATH).run();
     }
 
 }

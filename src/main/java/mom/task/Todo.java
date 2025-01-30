@@ -41,8 +41,6 @@ public class Todo extends Task {
      */
     @Override
     public String toSaveString() {
-        return "T"
-            + " | " + this.getStatus()
-            + " | " + this.getDescription();
+        return "T" + " | " + this.getStatus() + " | " + this.getDescription();
     }
 }

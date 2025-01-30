@@ -1,8 +1,8 @@
 package mom;
 
-import mom.task.*;
-
 import java.util.ArrayList;
+
+import mom.task.Task;
 
 /**
  * Ui class to handle easy printing of messages to user.
@@ -78,7 +78,7 @@ public class Ui {
         for (int i = 0; i < tasks.size(); i++) {
             int listIndex = i + 1;
             output.append(listIndex).append(". ").append(tasks.get(i).toString());
-            if(listIndex < tasks.size()) {
+            if (listIndex < tasks.size()) {
                 output.append("\n");
             }
         }

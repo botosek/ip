@@ -1,27 +1,22 @@
 package mom;
 
-import mom.command.Command;
-import mom.exceptions.CorruptedFileException;
-import mom.exceptions.InvalidInputException;
-
-import java.nio.file.FileAlreadyExistsException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.List;
+
+import mom.command.Command;
+import mom.exceptions.CorruptedFileException;
+import mom.exceptions.InvalidInputException;
 
 /**
  * Contains methods to parse input from user and data collected from hard disk file.
  */
 public interface Parser {
     /** List of valid datetime formats that can be parsed by chatbot */
-    List<String> DATETIME_FORMATS = List.of(
-            "yyyy-M-d HHmm",
-            "yyyy-M-d",
-            "d/M/yyyy HHmm",
-            "d/M/yyyy");
+
+    List<String> DATETIME_FORMATS = List.of("yyyy-M-d HHmm", "yyyy-M-d", "d/M/yyyy HHmm", "d/M/yyyy");
 
     /**
      * Parse raw user input.
@@ -94,8 +89,8 @@ public interface Parser {
      */
     static String parseEntryTodo(String entry, int offset) throws InvalidInputException {
         if (entry.split(" ").length == 1) {
-            throw new InvalidInputException("A 'todo' task requires a task description. " +
-                    "Please include a valid description.");
+            throw new InvalidInputException(
+                    "A 'todo' task requires a task description. " + "Please include a valid description.");
         }
         return entry.substring(offset);
     }
