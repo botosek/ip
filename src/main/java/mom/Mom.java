@@ -8,10 +8,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import java.lang.reflect.Array;
 import java.util.Scanner;
 
+/**
+ * Main class that runs the chatbot "Mom".
+ */
 public class Mom implements Parser {
+    /** Relative file path of hard disk. */
     private static final String TASKLIST_FILEPATH = "data" + File.separator + "mom.txt";
     private static final String CHATBOT_NAME = "Mom";
 
@@ -20,6 +23,11 @@ public class Mom implements Parser {
 
     private static TaskList taskList;
 
+    /**
+     * Creates a Mom object and loads tasklist if there is an existing data/mom.txt file found.
+     *
+     * @param filePath File path of the task list data/mom.txt file.
+     */
     public Mom(String filePath) {
         ui = new Ui(CHATBOT_NAME);
         storage = new Storage(filePath);
@@ -36,6 +44,9 @@ public class Mom implements Parser {
         }
     }
 
+    /**
+     * Runs the main program.
+     */
     public void run() {
         ui.displayIntro();
 
@@ -70,6 +81,9 @@ public class Mom implements Parser {
         ui.displayOutro();
     }
 
+    /**
+     * Starts the main program.
+     */
     public static void main(String[] args) {
         new Mom(TASKLIST_FILEPATH).run();
     }
