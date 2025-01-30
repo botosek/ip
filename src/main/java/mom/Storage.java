@@ -13,14 +13,30 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class that loads and saves tasklist from hard disk.
+ */
 public class Storage implements Parser {
+    /** Absolute filepath of hard disk file. */
     private final String filePath;
     private final ArrayList<Task> tasks = new ArrayList<>(100);
 
+    /**
+     * Creates Storage object and saves filepath of hard disk file.
+     *
+     * @param filePath File path of the hard disk file in reference to the program file.
+     */
     public Storage(String filePath) {
         this.filePath = getFilePath(filePath);
     }
 
+    /**
+     * If it is run as a packaged .jar file, looks for or creates hard disk file in reference to project root.
+     * Else, looks for or creates it reference to the project root.
+     *
+     * @param filePath File path of the hard disk file in reference to the program file.
+     * @return         File path of the hard disk file to be loaded from or saved into.
+     */
     public static String getFilePath(String filePath) {
         File jarFile = new File(Mom.class.getProtectionDomain().getCodeSource().getLocation().getPath());
         File f = new File(jarFile.getParentFile().getParent(), filePath);
@@ -33,6 +49,14 @@ public class Storage implements Parser {
         }
     }
 
+    /**
+     * Loads tasks from hard disk file
+     *
+     * @return tasks Arraylist of tasks from hard disk
+     * @throws CorruptedFileException If the task entry is not correctly formatted.
+     * @throws IOException If the contents of the file is not correctly formatted.
+     * @throws SecurityException If the program is unable to access the file due to security permissions.
+     */
     public ArrayList<Task> load() throws CorruptedFileException, IOException, SecurityException {
         File f = new File(this.filePath);
         Scanner s = new Scanner(f);
@@ -51,6 +75,13 @@ public class Storage implements Parser {
         return this.tasks;
     }
 
+    /**
+     * For each entry raw string, create its corresponding task object and saves it to an arraylist
+     *
+     * @param entryList Parsed String[] array of the entry string.
+     * @param entry     Raw entry string.
+     * @throws CorruptedFileException If no valid task was found for the entry string.
+     */
     public void handleFileEntries(String[] entryList, String entry) throws CorruptedFileException {
         String commandString = entryList[0];
         switch (commandString) {
@@ -81,6 +112,13 @@ public class Storage implements Parser {
         }
     }
 
+
+    /**
+     * Save task list to hard disk.
+     *
+     * @param tasklist ArrayList of tasks to be saved.
+     * @throws IOException If issues are faced when trying to write into the hard disk file.
+     */
     public void save(TaskList tasklist) throws IOException {
         File f = new File(this.filePath);
         FileWriter fw = new FileWriter(f);

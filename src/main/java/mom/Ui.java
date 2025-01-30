@@ -4,11 +4,24 @@ import mom.task.*;
 
 import java.util.ArrayList;
 
+/**
+ * Ui class to handle easy printing of messages to user.
+ */
 public class Ui {
     private static final String DIVIDER = "--------------------------------------------------";
     private static final String ERROR_DIVIDER = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
     private final String botName;
 
+    /**
+     * Handle all commands of the user except "bye".
+     *
+     * @param ui        The chatbots ui object.
+     * @param taskList  The task list of the user.
+     * @param command   The parse command of the user input.
+     * @param input     The raw input string of the user input.
+     * @param inputList The parsed String[] array of the user input.
+     * @param offset    The offset number where the description starts in the raw user input string.
+     */
     public Ui(String botName) {
         this.botName = botName;
     }
@@ -17,10 +30,16 @@ public class Ui {
         return botName;
     }
 
+    /**
+     * Provides shorter function name to display a message to user.
+     */
     public static void display(String message) {
         System.out.println(message);
     }
 
+    /**
+     * Displays error message with a different UI
+     */
     public static void errorDisplay(String message) {
         display("\n");
         display(ERROR_DIVIDER);
@@ -29,6 +48,9 @@ public class Ui {
         display("\n");
     }
 
+    /**
+     * Display default intro message with chatbot name.
+     */
     public void displayIntro() {
         display(DIVIDER);
         display("Hi, I'm " + this.getBotName() + "!");
@@ -36,12 +58,18 @@ public class Ui {
         display(DIVIDER + "\n");
     }
 
+    /**
+     * Displays default outro message.
+     */
     public void displayOutro() {
         display(DIVIDER);
         display("Bye. See you soon!");
         display(DIVIDER + "\n");
     }
 
+    /**
+     * Displays task list.
+     */
     public void displayTaskList(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTaskList();
         display(DIVIDER);
@@ -59,6 +87,9 @@ public class Ui {
 
     }
 
+    /**
+     * Displays marked task UI.
+     */
     public void displayMark(Task task) {
         display(DIVIDER);
         display("Nice! I've marked this task as done.");
@@ -66,6 +97,9 @@ public class Ui {
         display(DIVIDER + "\n");
     }
 
+    /**
+     * Displays unmarked task UI.
+     */
     public void displayUnmark(Task task) {
         display(DIVIDER);
         display("Okay, I've unmarked this task as incomplete.");
@@ -73,6 +107,9 @@ public class Ui {
         display(DIVIDER + "\n");
     }
 
+    /**
+     * Displays deleted task UI.
+     */
     public void displayDelete(int rank, Task task, int number) {
         display(DIVIDER);
         display("Understood, removing the task below:");
@@ -81,6 +118,9 @@ public class Ui {
         display(DIVIDER + "\n");
     }
 
+    /**
+     * Displays add task UI.
+     */
     public void displayAdd(Task task, int number) {
         display(DIVIDER);
         display("Got it. I've added this task:");
