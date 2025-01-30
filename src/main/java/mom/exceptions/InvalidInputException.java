@@ -7,6 +7,6 @@ public class InvalidInputException extends Exception {
 
     @Override
     public String toString() {
-        return "Invalid input detected:" + "\n" + getMessage() + "\n";
+        return "Invalid input detected:" + "\n" + getMessage();
     }
 }

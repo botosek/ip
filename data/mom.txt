@@ -1,5 +1,5 @@
 D | 0 | return book | 6/6/2025 0000
-T | 0 | do work 
+T | 0 | do work
 D | 1 | eat bao | 3/12/2025 0000
 E | 0 | pop balloons | 12/4/2025 1800-13/4/2025 0600
 T | 1 | read app

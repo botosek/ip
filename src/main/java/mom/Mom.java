@@ -8,12 +8,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class Mom implements Parser {
-    private static final String TASKLIST_FILEPATH = "." + File.separator + "src" + File.separator + "main"
-            + File.separator + "java" + File.separator + "data" + File.separator + "mom.txt";
-    private static final String CHATBOT_NAME = "mom.Mom";
+    private static final String TASKLIST_FILEPATH = "data" + File.separator + "mom.txt";
+    private static final String CHATBOT_NAME = "Mom";
 
     private final Storage storage;
     private final Ui ui;
@@ -27,8 +27,12 @@ public class Mom implements Parser {
             taskList = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             Ui.errorDisplay("File not found:\n" + filePath);
+            taskList = new TaskList();
         } catch (CorruptedFileException e) {
             Ui.errorDisplay("Corrupted file:\n" + e);
+            taskList = new TaskList();
+        } catch (IOException e) {
+            Ui.errorDisplay("I/O error:\n" + e);
         }
     }
 
@@ -50,8 +54,10 @@ public class Mom implements Parser {
                 } else {
                     taskList.handleTaskCommand(ui, taskList, command, inputString, inputList, offset);
                 }
-            } catch (InvalidInputException | IllegalArgumentException e) {
+            } catch (InvalidInputException e) {
                 Ui.errorDisplay(e.toString());
+            } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
+                Ui.errorDisplay("Invalid Command:\n" + e.getMessage());
             }
         }
 

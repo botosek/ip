@@ -18,10 +18,22 @@ public class Storage implements Parser {
     private final ArrayList<Task> tasks = new ArrayList<>(100);
 
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.filePath = getFilePath(filePath);
     }
 
-    public ArrayList<Task> load() throws FileNotFoundException, CorruptedFileException {
+    public static String getFilePath(String filePath) {
+        File jarFile = new File(Mom.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        File f = new File(jarFile.getParentFile().getParent(), filePath);
+
+        if (jarFile.toString().endsWith(".jar")) {
+            f.getParentFile().mkdirs();
+            return f.getAbsolutePath();
+        } else {
+            return "." + File.separator + filePath;
+        }
+    }
+
+    public ArrayList<Task> load() throws CorruptedFileException, IOException, SecurityException {
         File f = new File(this.filePath);
         Scanner s = new Scanner(f);
         while (s.hasNextLine()) {
@@ -73,10 +85,13 @@ public class Storage implements Parser {
         File f = new File(this.filePath);
         FileWriter fw = new FileWriter(f);
         ArrayList<Task> tasks = tasklist.getTaskList();
-        for (int i = 0; i < tasks.size() - 1; i++) {
-            fw.write(tasks.get(i).toSaveString() + "\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (i < tasks.size() - 1) {
+                fw.write(tasks.get(i).toSaveString() + "\n");
+            } else {
+                fw.write(tasks.get(i).toSaveString());
+            }
         }
-        fw.write(tasks.get(tasks.size() - 1).toSaveString());
         fw.close();
     }
 
