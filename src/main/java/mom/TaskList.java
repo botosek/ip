@@ -149,6 +149,10 @@ public class TaskList implements Parser {
             taskList.deleteTask(rank);
             break;
         }
+        case find: {
+            ui.displayFind(taskList, inputList[1]);
+            break;
+        }
         default: {
             try {
                 handleTask(ui, taskList, command, input, offset);

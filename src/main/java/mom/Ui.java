@@ -129,4 +129,20 @@ public class Ui {
         display(DIVIDER + "\n");
     }
 
+    public void displayFind(TaskList taskList, String keyword) {
+        ArrayList<Task> tasks = taskList.getTaskList();
+        display(DIVIDER);
+        StringBuilder output = new StringBuilder();
+        output.append("Here are your tasks with the matching keyword provided:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(keyword)) {
+                int listIndex = i + 1;
+                output.append(listIndex).append(". ").append(tasks.get(i).toString()).append("\n");
+            }
+        }
+        display(output.toString());
+        display(DIVIDER + "\n");
+
+    }
+
 }
