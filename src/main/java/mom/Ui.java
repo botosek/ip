@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Ui {
     private static final String DIVIDER = "--------------------------------------------------";
+    private static final String ERROR_DIVIDER = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
     private final String botName;
 
     public Ui(String botName) {
@@ -21,11 +22,11 @@ public class Ui {
     }
 
     public static void errorDisplay(String message) {
-        display(DIVIDER);
-        display(DIVIDER);
+        display("\n");
+        display(ERROR_DIVIDER);
         display(message);
-        display(DIVIDER);
-        display(DIVIDER);
+        display(ERROR_DIVIDER);
+        display("\n");
     }
 
     public void displayIntro() {
@@ -46,12 +47,13 @@ public class Ui {
         display(DIVIDER);
         StringBuilder output = new StringBuilder();
         output.append("Here are the tasks in your list:\n");
-        for (int i = 0; i < tasks.size() - 1; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             int listIndex = i + 1;
-            output.append(listIndex).append(". ").append(tasks.get(i).toString()).append("\n");
+            output.append(listIndex).append(". ").append(tasks.get(i).toString());
+            if(listIndex < tasks.size()) {
+                output.append("\n");
+            }
         }
-        Task lastTask = tasks.get(tasks.size() - 1);
-        output.append(taskList.getSize()).append(". ").append(lastTask.toString());
         display(output.toString());
         display(DIVIDER + "\n");
 
