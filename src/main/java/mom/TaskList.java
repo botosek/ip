@@ -33,6 +33,52 @@ public class TaskList implements Parser {
     }
 
     /**
+     * Add task that user has input into task list.
+     *
+     * @param ui       The chatbots ui object.
+     * @param taskList The task list of the user.
+     * @param command  The parse command of the user input.
+     * @param input    The raw input string of the user input.
+     * @param offset   The offset number where the description starts in the raw user input string.
+     * @throws InvalidInputException If the raw user input is not a valid command.
+     */
+    public static void handleTask(Ui ui, TaskList taskList, Command command, String input, int offset)
+            throws InvalidInputException {
+        try {
+            switch (command) {
+            case todo: {
+                String description = Parser.parseEntryTodo(input, offset);
+                taskList.addTask(new Todo(description));
+                break;
+            }
+            case deadline: {
+                Object[] result = Parser.parseEntryDeadline(input, offset);
+                String description = (String) result[0];
+                LocalDateTime byDateTime = (LocalDateTime) result[1];
+                taskList.addTask(new Deadline(description, byDateTime));
+                break;
+            }
+            case event: {
+                Object[] results = Parser.parseEntryEvent(input, offset);
+                String description = (String) results[0];
+                LocalDateTime fromDateTime = (LocalDateTime) results[1];
+                LocalDateTime toDateTime = (LocalDateTime) results[2];
+                taskList.addTask(new Event(description, fromDateTime, toDateTime));
+                break;
+            }
+            default: {
+                throw new InvalidInputException("Please enter a valid command.");
+
+            }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidInputException("Invalid Command: " + input);
+        }
+
+        ui.displayAdd(taskList.getTask(taskList.getSize()), taskList.getSize());
+    }
+
+    /**
      * Add task into task list.
      *
      * @param task Task to be added into task list.
@@ -162,51 +208,5 @@ public class TaskList implements Parser {
             break;
         }
         }
-    }
-
-    /**
-     * Add task that user has input into task list.
-     *
-     * @param ui       The chatbots ui object.
-     * @param taskList The task list of the user.
-     * @param command  The parse command of the user input.
-     * @param input    The raw input string of the user input.
-     * @param offset   The offset number where the description starts in the raw user input string.
-     * @throws InvalidInputException If the raw user input is not a valid command.
-     */
-    public static void handleTask(Ui ui, TaskList taskList, Command command, String input, int offset)
-            throws InvalidInputException {
-        try {
-            switch (command) {
-            case todo: {
-                String description = Parser.parseEntryTodo(input, offset);
-                taskList.addTask(new Todo(description));
-                break;
-            }
-            case deadline: {
-                Object[] result = Parser.parseEntryDeadline(input, offset);
-                String description = (String) result[0];
-                LocalDateTime byDateTime = (LocalDateTime) result[1];
-                taskList.addTask(new Deadline(description, byDateTime));
-                break;
-            }
-            case event: {
-                Object[] results = Parser.parseEntryEvent(input, offset);
-                String description = (String) results[0];
-                LocalDateTime fromDateTime = (LocalDateTime) results[1];
-                LocalDateTime toDateTime = (LocalDateTime) results[2];
-                taskList.addTask(new Event(description, fromDateTime, toDateTime));
-                break;
-            }
-            default: {
-                throw new InvalidInputException("Please enter a valid command.");
-
-            }
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidInputException("Invalid Command: " + input);
-        }
-
-        ui.displayAdd(taskList.getTask(taskList.getSize()), taskList.getSize());
     }
 }
