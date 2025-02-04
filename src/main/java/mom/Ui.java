@@ -12,16 +12,6 @@ public class Ui {
     private static final String ERROR_DIVIDER = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
     private final String botName;
 
-    /**
-     * Handle all commands of the user except "bye".
-     *
-     * @param ui        The chatbots ui object.
-     * @param taskList  The task list of the user.
-     * @param command   The parse command of the user input.
-     * @param input     The raw input string of the user input.
-     * @param inputList The parsed String[] array of the user input.
-     * @param offset    The offset number where the description starts in the raw user input string.
-     */
     public Ui(String botName) {
         this.botName = botName;
     }
@@ -129,6 +119,9 @@ public class Ui {
         display(DIVIDER + "\n");
     }
 
+    /**
+     * Displays tasks with matching keywords.
+     */
     public void displayFind(TaskList taskList, String keyword) {
         ArrayList<Task> tasks = taskList.getTaskList();
         display(DIVIDER);

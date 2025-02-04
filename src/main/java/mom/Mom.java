@@ -21,7 +21,7 @@ public class Mom implements Parser {
     private final Ui ui;
 
     /**
-     * Creates new chatbot Mom object and loads tasklist from hard disk.
+     * Creates new chatbot Mom tasklist from hard disk.
      *
      * @param filePath relative file path of hard disk file.
      */
