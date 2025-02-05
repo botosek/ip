@@ -10,59 +10,30 @@ import mom.task.Task;
 public class Ui {
     private static final String DIVIDER = "--------------------------------------------------";
     private static final String ERROR_DIVIDER = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
-    private final String botName;
+    private static final String botName = "Mom";
 
-    public Ui(String botName) {
-        this.botName = botName;
-    }
-
-    public String getBotName() {
-        return botName;
-    }
-
-    /**
-     * Provides shorter function name to display a message to user.
-     */
-    public static void display(String message) {
-        System.out.println(message);
-    }
-
-    /**
-     * Displays error message with a different UI
-     */
-    public static void errorDisplay(String message) {
-        display("\n");
-        display(ERROR_DIVIDER);
-        display(message);
-        display(ERROR_DIVIDER);
-        display("\n");
+    public Ui() {
     }
 
     /**
      * Display default intro message with chatbot name.
      */
-    public void displayIntro() {
-        display(DIVIDER);
-        display("Hi, I'm " + this.getBotName() + "!");
-        display("What can I do for you?");
-        display(DIVIDER + "\n");
+    public static String displayIntro() {
+        return "Hi, I'm " + botName + "!" + "\n" + "What can I do for you?";
     }
 
     /**
      * Displays default outro message.
      */
-    public void displayOutro() {
-        display(DIVIDER);
-        display("Bye. See you soon!");
-        display(DIVIDER + "\n");
+    public static String displayOutro() {
+        return "Bye. See you soon!";
     }
 
     /**
      * Displays task list.
      */
-    public void displayTaskList(TaskList taskList) {
+    public static String displayTaskList(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTaskList();
-        display(DIVIDER);
         StringBuilder output = new StringBuilder();
         output.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
@@ -72,59 +43,45 @@ public class Ui {
                 output.append("\n");
             }
         }
-        display(output.toString());
-        display(DIVIDER + "\n");
+        return output.toString();
 
     }
 
     /**
      * Displays marked task UI.
      */
-    public void displayMark(Task task) {
-        display(DIVIDER);
-        display("Nice! I've marked this task as done.");
-        display("    " + task.toString());
-        display(DIVIDER + "\n");
+    public static String displayMark(Task task) {
+        return "Nice! I've marked this task as done." + "\n    " + task.toString();
     }
 
     /**
      * Displays unmarked task UI.
      */
-    public void displayUnmark(Task task) {
-        display(DIVIDER);
-        display("Okay, I've unmarked this task as incomplete.");
-        display("    " + task.toString());
-        display(DIVIDER + "\n");
+    public static String displayUnmark(Task task) {
+        return "Okay, I've unmarked this task as incomplete." + "\n    " + task.toString();
     }
 
     /**
      * Displays deleted task UI.
      */
-    public void displayDelete(int rank, Task task, int number) {
-        display(DIVIDER);
-        display("Understood, removing the task below:");
-        display("    " + rank + "." + task.toString());
-        display("Now you have " + number + " tasks in the list.");
-        display(DIVIDER + "\n");
+    public static String displayDelete(int rank, Task task, int number) {
+        return "Understood, removing the task below:" + "\n    " + rank + "." + task.toString() + "\nNow you have " +
+                number + " tasks in the list.";
     }
 
     /**
      * Displays add task UI.
      */
-    public void displayAdd(Task task, int number) {
-        display(DIVIDER);
-        display("Got it. I've added this task:");
-        display("    " + task.toString());
-        display("Now you have " + number + " tasks in the list.");
-        display(DIVIDER + "\n");
+    public static String displayAdd(Task task, int number) {
+        return "Got it. I've added this task:" + "\n    " + task.toString() + "\nNow you have " + number +
+                " tasks in the list.";
     }
 
     /**
      * Displays tasks with matching keywords.
      */
-    public void displayFind(TaskList taskList, String keyword) {
+    public static String displayFind(TaskList taskList, String keyword) {
         ArrayList<Task> tasks = taskList.getTaskList();
-        display(DIVIDER);
         StringBuilder output = new StringBuilder();
         output.append("Here are your tasks with the matching keyword provided:\n");
         for (int i = 0; i < tasks.size(); i++) {
@@ -133,9 +90,10 @@ public class Ui {
                 output.append(listIndex).append(". ").append(tasks.get(i).toString()).append("\n");
             }
         }
-        display(output.toString());
-        display(DIVIDER + "\n");
-
+        return output.toString();
     }
 
+    public String getBotName() {
+        return botName;
+    }
 }
