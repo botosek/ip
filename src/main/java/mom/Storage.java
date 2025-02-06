@@ -17,7 +17,9 @@ import mom.task.Todo;
  * Storage class that loads and saves tasklist from hard disk.
  */
 public class Storage implements Parser {
-    /** Absolute filepath of hard disk file. */
+    /**
+     * Absolute filepath of hard disk file.
+     */
     private final String filePath;
     private final ArrayList<Task> tasks = new ArrayList<>(100);
 
@@ -35,7 +37,7 @@ public class Storage implements Parser {
      * Else, looks for or creates it reference to the project root.
      *
      * @param filePath File path of the hard disk file in reference to the program file.
-     * @return         File path of the hard disk file to be loaded from or saved into.
+     * @return File path of the hard disk file to be loaded from or saved into.
      */
     public static String getFilePath(String filePath) {
         File jarFile = new File(Mom.class.getProtectionDomain().getCodeSource().getLocation().getPath());
@@ -54,8 +56,8 @@ public class Storage implements Parser {
      *
      * @return tasks Arraylist of tasks from hard disk
      * @throws CorruptedFileException If the task entry is not correctly formatted.
-     * @throws IOException If the contents of the file is not correctly formatted.
-     * @throws SecurityException If the program is unable to access the file due to security permissions.
+     * @throws IOException            If the contents of the file is not correctly formatted.
+     * @throws SecurityException      If the program is unable to access the file due to security permissions.
      */
     public ArrayList<Task> load() throws CorruptedFileException, IOException, SecurityException {
         File f = new File(this.filePath);
@@ -67,7 +69,7 @@ public class Storage implements Parser {
                 String[] entryList = Parser.parseLoadTask(entry);
                 handleFileEntries(entryList, entry);
             } catch (CorruptedFileException e) {
-                Ui.errorDisplay(e.toString());
+                System.out.println(e.toString());
             }
         }
         s.close();

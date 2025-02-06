@@ -14,7 +14,9 @@ import mom.exceptions.InvalidInputException;
  * Contains methods to parse input from user and data collected from hard disk file.
  */
 public interface Parser {
-    /** List of valid datetime formats that can be parsed by chatbot */
+    /**
+     * List of valid datetime formats that can be parsed by chatbot
+     */
 
     List<String> DATETIME_FORMATS = List.of("yyyy-M-d HHmm", "yyyy-M-d", "d/M/yyyy HHmm", "d/M/yyyy");
 
@@ -22,8 +24,8 @@ public interface Parser {
      * Parse raw user input.
      *
      * @param input Raw input string from user.
-     * @return      An array containing the command, raw input string, the input divided by " " in a
-     *              String[] array, and an integer offset where command ends in the raw input.
+     * @return An array containing the command, raw input string, the input divided by " " in a
+     * String[] array, and an integer offset where command ends in the raw input.
      * @throws InvalidInputException If the command is not a valid Command enum type.
      */
     static Object[] parseInput(String input) throws InvalidInputException {
@@ -40,8 +42,8 @@ public interface Parser {
     /**
      * Checks if command from user input is valid.
      *
-     * @param  userCommand String taken from user input.
-     * @return             A boolean indicating if the string is a valid command.
+     * @param userCommand String taken from user input.
+     * @return A boolean indicating if the string is a valid command.
      */
     static boolean checkValidCommand(String userCommand) {
         for (Command command : Command.values()) {
@@ -55,10 +57,10 @@ public interface Parser {
     /**
      * Parse date time string into LocalDateTime type. If no time is given, assumes time is at 0000H.
      *
-     * @param  date Raw input string from user.
-     * @return      Parsed LocalDateTime date and time.
+     * @param date Raw input string from user.
+     * @return Parsed LocalDateTime date and time.
      * @throws DateTimeParseException If the string is not formatted properly or if no date was found.
-     * @throws InvalidInputException If the string format is not valid.
+     * @throws InvalidInputException  If the string format is not valid.
      */
     static LocalDateTime parseDate(String date) throws DateTimeParseException, InvalidInputException {
         for (String datetimeFormat : DATETIME_FORMATS) {
@@ -84,7 +86,7 @@ public interface Parser {
      * Parse Todo task from hard disk task list.
      *
      * @param entry Raw input string from user.
-     * @return      Parsed string with Todo description.
+     * @return Parsed string with Todo description.
      * @throws InvalidInputException If the entry is not valid.
      */
     static String parseEntryTodo(String entry, int offset) throws InvalidInputException {
@@ -99,7 +101,7 @@ public interface Parser {
      * Parse Deadline task from hard disk task list.
      *
      * @param entry Raw input string from user.
-     * @return      Parsed string with Deadline description.
+     * @return Parsed string with Deadline description.
      * @throws InvalidInputException If the entry is not valid.
      */
     static Object[] parseEntryDeadline(String entry, int offset) throws InvalidInputException {
@@ -113,7 +115,7 @@ public interface Parser {
      * Parse Event task from hard disk task list.
      *
      * @param entry Raw input string from user.
-     * @return      Parsed string with Event description.
+     * @return Parsed string with Event description.
      * @throws InvalidInputException If the entry is not valid.
      */
     static Object[] parseEntryEvent(String entry, int offset) throws InvalidInputException {
@@ -130,7 +132,7 @@ public interface Parser {
     /**
      * Parse task entry from hard disk task list.
      *
-     * @param  entry     Raw input string from user.
+     * @param entry Raw input string from user.
      * @return entryList Parsed string array of the task entry.
      * @throws CorruptedFileException If the entry is not properly formatted.
      */
@@ -152,10 +154,10 @@ public interface Parser {
     /**
      * Parse Deadline task entry from hard disk task list.
      *
-     * @param  entryList Raw input string in an array split by " " from user.
-     * @param  entry     Raw input string from user.
-     * @return           Parsed string array of the task entry containing the description, status, and
-     *                   deadline time.
+     * @param entryList Raw input string in an array split by " " from user.
+     * @param entry     Raw input string from user.
+     * @return Parsed string array of the task entry containing the description, status, and
+     * deadline time.
      * @throws CorruptedFileException If the entry is not properly formatted.
      */
     static Object[] parseLoadDeadline(String[] entryList, String entry) throws CorruptedFileException {
@@ -170,10 +172,10 @@ public interface Parser {
     /**
      * Parse Event task entry from hard disk task list.
      *
-     * @param  entryList Raw input string in an array split by " " from user.
-     * @param  entry     Raw input string from user.
-     * @return           Parsed string array of the task entry containing the description, status, and
-     *                   start and end time.
+     * @param entryList Raw input string in an array split by " " from user.
+     * @param entry     Raw input string from user.
+     * @return Parsed string array of the task entry containing the description, status, and
+     * start and end time.
      * @throws CorruptedFileException If the entry is not properly formatted.
      */
     static Object[] parseLoadEvent(String[] entryList, String entry) throws CorruptedFileException {

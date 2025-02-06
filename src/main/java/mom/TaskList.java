@@ -42,7 +42,7 @@ public class TaskList implements Parser {
      * @param offset   The offset number where the description starts in the raw user input string.
      * @throws InvalidInputException If the raw user input is not a valid command.
      */
-    public static void handleTask(Ui ui, TaskList taskList, Command command, String input, int offset)
+    public static String handleTask(TaskList taskList, Command command, String input, int offset)
             throws InvalidInputException {
         try {
             switch (command) {
@@ -75,7 +75,7 @@ public class TaskList implements Parser {
             throw new InvalidInputException("Invalid Command: " + input);
         }
 
-        ui.displayAdd(taskList.getTask(taskList.getSize()), taskList.getSize());
+        return Ui.displayAdd(taskList.getTask(taskList.getSize()), taskList.getSize());
     }
 
     /**
@@ -158,8 +158,59 @@ public class TaskList implements Parser {
         return new Object[]{false};
     }
 
+//    /**
+//     * Handle all commands of the user except "bye".
+//     *
+//     * @param ui        The chatbots ui object.
+//     * @param taskList  The task list of the user.
+//     * @param command   The parse command of the user input.
+//     * @param input     The raw input string of the user input.
+//     * @param inputList The parsed String[] array of the user input.
+//     * @param offset    The offset number where the description starts in the raw user input string.
+//     */
+//    public String handleTaskCommand(TaskList taskList, Command command, String input, String[] inputList,
+//                                  int offset) {
+//        switch (command) {
+//        case list: {
+//            return Ui.displayTaskList(taskList);
+//        }
+//        case mark: {
+//            Object[] result = taskList.markTask(input, offset);
+//            if ((boolean) result[0]) {
+//                return Ui.displayMark((Task) result[1]);
+//            }
+//            break;
+//        }
+//        case unmark: {
+//            Object[] result = taskList.unmarkTask(input, offset);
+//            if ((boolean) result[0]) {
+//                return Ui.displayUnmark((Task) result[1]);
+//            }
+//            break;
+//        }
+//        case delete: {
+//            int rank = Integer.parseInt(inputList[1]);
+//            ui.displayDelete(rank, taskList.getTask(rank), taskList.getSize() - 1);
+//            taskList.deleteTask(rank);
+//            break;
+//        }
+//        case find: {
+//            ui.displayFind(taskList, inputList[1]);
+//            break;
+//        }
+//        default: {
+//            try {
+//                handleTask(ui, taskList, command, input, offset);
+//            } catch (InvalidInputException e) {
+//                Ui.errorDisplay(e.toString());
+//            }
+//            break;
+//        }
+//        }
+//    }
+
     /**
-     * Handle all commands of the user except "bye".
+     * Handle all commands of the user when the bot is in GUI format.
      *
      * @param ui        The chatbots ui object.
      * @param taskList  The task list of the user.
@@ -167,46 +218,45 @@ public class TaskList implements Parser {
      * @param input     The raw input string of the user input.
      * @param inputList The parsed String[] array of the user input.
      * @param offset    The offset number where the description starts in the raw user input string.
+     * @return The user response.
      */
-    public void handleTaskCommand(Ui ui, TaskList taskList, Command command, String input, String[] inputList,
-                                  int offset) {
-        switch (command) {
-        case list: {
-            ui.displayTaskList(taskList);
-            break;
-        }
-        case mark: {
-            Object[] result = taskList.markTask(input, offset);
-            if ((boolean) result[0]) {
-                ui.displayMark((Task) result[1]);
+    public String handleTaskCommandGui(TaskList taskList, Command command, String input, String[] inputList,
+                                       int offset) {
+        try {
+            switch (command) {
+            case list: {
+                return Ui.displayTaskList(taskList);
             }
-            break;
-        }
-        case unmark: {
-            Object[] result = taskList.unmarkTask(input, offset);
-            if ((boolean) result[0]) {
-                ui.displayUnmark((Task) result[1]);
+            case mark: {
+                Object[] result = taskList.markTask(input, offset);
+                if ((boolean) result[0]) {
+                    return Ui.displayMark((Task) result[1]);
+                }
+                break;
             }
-            break;
-        }
-        case delete: {
-            int rank = Integer.parseInt(inputList[1]);
-            ui.displayDelete(rank, taskList.getTask(rank), taskList.getSize() - 1);
-            taskList.deleteTask(rank);
-            break;
-        }
-        case find: {
-            ui.displayFind(taskList, inputList[1]);
-            break;
-        }
-        default: {
-            try {
-                handleTask(ui, taskList, command, input, offset);
-            } catch (InvalidInputException e) {
-                Ui.errorDisplay(e.toString());
+            case unmark: {
+                Object[] result = taskList.unmarkTask(input, offset);
+                if ((boolean) result[0]) {
+                    return Ui.displayUnmark((Task) result[1]);
+                }
+                break;
             }
-            break;
-        }
+            case delete: {
+                int rank = Integer.parseInt(inputList[1]);
+                String reply = Ui.displayDelete(rank, taskList.getTask(rank), taskList.getSize() - 1);
+                taskList.deleteTask(rank);
+                return reply;
+            }
+            case find: {
+                return Ui.displayFind(taskList, inputList[1]);
+            }
+            default: {
+                return handleTask(taskList, command, input, offset);
+            }
+            }
+            throw new InvalidInputException("Invalid Command: " + input);
+        } catch (InvalidInputException e) {
+            return e.toString();
         }
     }
 }
