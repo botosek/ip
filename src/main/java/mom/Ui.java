@@ -8,8 +8,6 @@ import mom.task.Task;
  * Ui class to handle easy printing of messages to user.
  */
 public class Ui {
-    private static final String DIVIDER = "--------------------------------------------------";
-    private static final String ERROR_DIVIDER = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
     private static final String botName = "Mom";
 
     public Ui() {
@@ -65,16 +63,16 @@ public class Ui {
      * Displays deleted task UI.
      */
     public static String displayDelete(int rank, Task task, int number) {
-        return "Understood, removing the task below:" + "\n    " + rank + "." + task.toString() + "\nNow you have " +
-                number + " tasks in the list.";
+        return "Understood, removing the task below:" + "\n    " + rank + "." + task.toString() + "\nNow you have "
+                + number + " tasks in the list.";
     }
 
     /**
      * Displays add task UI.
      */
     public static String displayAdd(Task task, int number) {
-        return "Got it. I've added this task:" + "\n    " + task.toString() + "\nNow you have " + number +
-                " tasks in the list.";
+        return "Got it. I've added this task:" + "\n    " + task.toString() + "\nNow you have " + number
+                + " tasks in the list.";
     }
 
     /**
@@ -91,9 +89,5 @@ public class Ui {
             }
         }
         return output.toString();
-    }
-
-    public String getBotName() {
-        return botName;
     }
 }
