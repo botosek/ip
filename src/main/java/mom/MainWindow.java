@@ -29,6 +29,9 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     private Mom mom;
 
+    /**
+     * Start up main window
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

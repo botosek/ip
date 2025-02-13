@@ -1,3 +1,4 @@
+
 package mom;
 
 import java.time.LocalDateTime;
@@ -35,7 +36,6 @@ public class TaskList implements Parser {
     /**
      * Add task that user has input into task list.
      *
-     * @param ui       The chatbots ui object.
      * @param taskList The task list of the user.
      * @param command  The parse command of the user input.
      * @param input    The raw input string of the user input.
@@ -74,8 +74,12 @@ public class TaskList implements Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidInputException("Invalid Command: " + input);
         }
+        int size = taskList.getSize();
+        Task task = taskList.getTask(size);
+        assert size > -1;
+        assert task != null;
 
-        return Ui.displayAdd(taskList.getTask(taskList.getSize()), taskList.getSize());
+        return Ui.displayAdd(task, size);
     }
 
     /**
@@ -158,61 +162,9 @@ public class TaskList implements Parser {
         return new Object[]{false};
     }
 
-//    /**
-//     * Handle all commands of the user except "bye".
-//     *
-//     * @param ui        The chatbots ui object.
-//     * @param taskList  The task list of the user.
-//     * @param command   The parse command of the user input.
-//     * @param input     The raw input string of the user input.
-//     * @param inputList The parsed String[] array of the user input.
-//     * @param offset    The offset number where the description starts in the raw user input string.
-//     */
-//    public String handleTaskCommand(TaskList taskList, Command command, String input, String[] inputList,
-//                                  int offset) {
-//        switch (command) {
-//        case list: {
-//            return Ui.displayTaskList(taskList);
-//        }
-//        case mark: {
-//            Object[] result = taskList.markTask(input, offset);
-//            if ((boolean) result[0]) {
-//                return Ui.displayMark((Task) result[1]);
-//            }
-//            break;
-//        }
-//        case unmark: {
-//            Object[] result = taskList.unmarkTask(input, offset);
-//            if ((boolean) result[0]) {
-//                return Ui.displayUnmark((Task) result[1]);
-//            }
-//            break;
-//        }
-//        case delete: {
-//            int rank = Integer.parseInt(inputList[1]);
-//            ui.displayDelete(rank, taskList.getTask(rank), taskList.getSize() - 1);
-//            taskList.deleteTask(rank);
-//            break;
-//        }
-//        case find: {
-//            ui.displayFind(taskList, inputList[1]);
-//            break;
-//        }
-//        default: {
-//            try {
-//                handleTask(ui, taskList, command, input, offset);
-//            } catch (InvalidInputException e) {
-//                Ui.errorDisplay(e.toString());
-//            }
-//            break;
-//        }
-//        }
-//    }
-
     /**
      * Handle all commands of the user when the bot is in GUI format.
      *
-     * @param ui        The chatbots ui object.
      * @param taskList  The task list of the user.
      * @param command   The parse command of the user input.
      * @param input     The raw input string of the user input.

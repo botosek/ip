@@ -29,7 +29,7 @@ public class Event extends Task {
      * Create new Event object.
      *
      * @param description Deadline task description.
-      @param status      Completion status of task.
+     * @param status      Completion status of task.
      * @param from        Start date and time.
      * @param to          End date and time.
      */
@@ -46,8 +46,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from:" + from.format(DATETIME_PRINT) + " to:" + to.format(DATETIME_PRINT) +
-                ")";
+        return "[E]" + super.toString() + " (from:" + from.format(DATETIME_PRINT) + " to:" + to.format(DATETIME_PRINT)
+                + ")";
     }
 
     /**
@@ -56,8 +56,8 @@ public class Event extends Task {
      * @return  Task string to be saved to hard disk.
      */
     public String toSaveString() {
-        return "E" + " | " + this.getStatus() + " | " + this.getDescription() + " | " +
-                this.from.format(DATETIME_SAVE) + "-" + this.to.format(DATETIME_SAVE);
+        return "E" + " | " + this.getStatus() + " | " + this.getDescription() + " | "
+                + this.from.format(DATETIME_SAVE) + "-" + this.to.format(DATETIME_SAVE);
     }
 }
 

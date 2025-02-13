@@ -30,12 +30,12 @@ public class Task {
 
     public String getStatusIcon() {
         return isDone ? "[X]"
-                      : "[ ]";
+                : "[ ]";
     }
 
     public String getStatus() {
         return isDone ? "1"
-                      : "0";
+                : "0";
     }
 
     public String getDescription() {
@@ -59,7 +59,7 @@ public class Task {
     /**
      * Generate string of task to be displayed to user.
      *
-     * @return  Task string to be displayed to user.
+     * @return Task string to be displayed to user.
      */
     public String toString() {
         return this.getStatusIcon() + " " + this.getDescription();
@@ -68,7 +68,7 @@ public class Task {
     /**
      * Generate string of task to be saved in hard disk.
      *
-     * @return  Task string to be saved to hard disk.
+     * @return Task string to be saved to hard disk.
      */
     public String toSaveString() {
         return this.getStatusIcon() + " " + this.getDescription();
