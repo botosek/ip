@@ -29,6 +29,9 @@ public class Ui {
 
     /**
      * Displays task list.
+     *
+     * @param taskList The list of tasks of type TaskList
+     * @return         The string formatted list of tasks
      */
     public static String displayTaskList(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTaskList();
@@ -47,6 +50,9 @@ public class Ui {
 
     /**
      * Displays marked task UI.
+     *
+     * @param task  The task to be marked.
+     * @return      String formatted task indicated as marked.
      */
     public static String displayMark(Task task) {
         return "Nice! I've marked this task as done." + "\n    " + task.toString();
@@ -54,6 +60,9 @@ public class Ui {
 
     /**
      * Displays unmarked task UI.
+     *
+     * @param task  The task to be unmarked.
+     * @return      String formatted task indicated as unmarked.
      */
     public static String displayUnmark(Task task) {
         return "Okay, I've unmarked this task as incomplete." + "\n    " + task.toString();
@@ -61,6 +70,10 @@ public class Ui {
 
     /**
      * Displays deleted task UI.
+     *
+     * @param rank The rank position of the task in the tasklist.
+     * @param task The task.
+     * @param number The number of tasks left in the task list.
      */
     public static String displayDelete(int rank, Task task, int number) {
         return "Understood, removing the task below:" + "\n    " + rank + "." + task.toString() + "\nNow you have "

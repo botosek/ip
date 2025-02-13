@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * A GUI for Mom using FXML.
  */
 public class Main extends Application {
-    private Mom mom = new Mom();
+    private final Mom mom = new Mom();
 
     @Override
     public void start(Stage stage) {
