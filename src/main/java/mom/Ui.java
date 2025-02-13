@@ -74,6 +74,7 @@ public class Ui {
      * @param rank The rank position of the task in the tasklist.
      * @param task The task.
      * @param number The number of tasks left in the task list.
+     * @return       The formatted string output of the deleted task.
      */
     public static String displayDelete(int rank, Task task, int number) {
         return "Understood, removing the task below:" + "\n    " + rank + "." + task.toString() + "\nNow you have "
@@ -82,6 +83,10 @@ public class Ui {
 
     /**
      * Displays add task UI.
+     *
+     * @param task The task to add.
+     * @param number The final number of tasks in the list.
+     * @return       The formatted string output of the task added.
      */
     public static String displayAdd(Task task, int number) {
         return "Got it. I've added this task:" + "\n    " + task.toString() + "\nNow you have " + number
@@ -90,6 +95,10 @@ public class Ui {
 
     /**
      * Displays tasks with matching keywords.
+     *
+     * @param taskList The arraylist of tasks.
+     * @param keyword  The keyword string that will be used to identify the tasks.
+     * @return        The formatted String output of the tasks with matching keywords.
      */
     public static String displayFind(TaskList taskList, String keyword) {
         ArrayList<Task> tasks = taskList.getTaskList();
