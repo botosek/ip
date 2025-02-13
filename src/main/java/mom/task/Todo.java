@@ -27,7 +27,7 @@ public class Todo extends Task {
     /**
      * Generate string of task to be displayed to user.
      *
-     * @return  Task string to be displayed to user.
+     * @return Task string to be displayed to user.
      */
     @Override
     public String toString() {
@@ -37,7 +37,7 @@ public class Todo extends Task {
     /**
      * Generate string of task to be saved in hard disk.
      *
-     * @return  Task string to be saved to hard disk.
+     * @return Task string to be saved to hard disk.
      */
     @Override
     public String toSaveString() {

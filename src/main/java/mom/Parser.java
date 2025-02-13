@@ -25,7 +25,7 @@ public interface Parser {
      *
      * @param input Raw input string from user.
      * @return An array containing the command, raw input string, the input divided by " " in a
-     * String[] array, and an integer offset where command ends in the raw input.
+     *         String[] array, and an integer offset where command ends in the raw input.
      * @throws InvalidInputException If the command is not a valid Command enum type.
      */
     static Object[] parseInput(String input) throws InvalidInputException {
@@ -157,7 +157,7 @@ public interface Parser {
      * @param entryList Raw input string in an array split by " " from user.
      * @param entry     Raw input string from user.
      * @return Parsed string array of the task entry containing the description, status, and
-     * deadline time.
+     *         deadline time.
      * @throws CorruptedFileException If the entry is not properly formatted.
      */
     static Object[] parseLoadDeadline(String[] entryList, String entry) throws CorruptedFileException {
@@ -175,7 +175,7 @@ public interface Parser {
      * @param entryList Raw input string in an array split by " " from user.
      * @param entry     Raw input string from user.
      * @return Parsed string array of the task entry containing the description, status, and
-     * start and end time.
+     *         start and end time.
      * @throws CorruptedFileException If the entry is not properly formatted.
      */
     static Object[] parseLoadEvent(String[] entryList, String entry) throws CorruptedFileException {

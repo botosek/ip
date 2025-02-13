@@ -1,3 +1,4 @@
+
 package mom;
 
 import java.io.IOException;
@@ -76,5 +77,4 @@ public class DialogBox extends HBox {
             // Do nothing
         }
     }
-
 }

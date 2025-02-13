@@ -1,19 +1,17 @@
-package mom;  //same package as the class being tested
+package mom;
 
 
-
-
-import mom.task.Task;
-import mom.task.Todo;
-import mom.task.Deadline;
-import mom.task.Event;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import mom.task.Deadline;
+import mom.task.Event;
+import mom.task.Task;
+import mom.task.Todo;
 
 public class MomTest {
     @Test
