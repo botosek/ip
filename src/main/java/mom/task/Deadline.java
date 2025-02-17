@@ -22,6 +22,20 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(Deadline other) {
+        super(other);
+        this.by = other.getBy();
+    }
+
+    @Override
+    public Task copy() {
+        return new Deadline(this); // Calls the Deadline copy constructor
+    }
+
+    public LocalDateTime getBy() {
+        return by;
+    }
+
     /**
      * Create new Deadline object.
      *

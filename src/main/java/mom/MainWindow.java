@@ -61,17 +61,23 @@ public class MainWindow extends AnchorPane {
             }
             Stage stage = (Stage) userInput.getScene().getWindow();
             stage.close();
-        }
-        String response = mom.getResponse(input);
-        try {
-            Command commandType = mom.getCommandType(input);
-            dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage, commandType));
-        } catch (IllegalArgumentException | InvalidInputException e) {
-            dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage, Command.regular));
-        }
+        } else if (input.equals("undo")) {
+            StateList.undo();
+            String response = Ui.displayUndo();
+            dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage, Command.regular));
+            userInput.clear();
+        } else {
+            String response = mom.getResponse(input);
+            try {
+                Command commandType = mom.getCommandType(input);
+                dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getDukeDialog(response, dukeImage, commandType));
+            } catch (IllegalArgumentException | InvalidInputException e) {
+                dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getDukeDialog(response, dukeImage, Command.regular));
+            }
 
-        userInput.clear();
+            userInput.clear();
+        }
     }
 }

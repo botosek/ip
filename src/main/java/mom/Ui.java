@@ -112,4 +112,11 @@ public class Ui {
         }
         return output.toString();
     }
+
+    /**
+     * Displays undo message
+     */
+    public static String displayUndo() {
+        return "Undoing latest command. Use the command 'list' to view your current tasklist state!";
+    }
 }

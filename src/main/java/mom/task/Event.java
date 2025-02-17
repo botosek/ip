@@ -25,6 +25,25 @@ public class Event extends Task {
         this.to = to;
     }
 
+    public Event(Event other) {
+        super(other);
+        this.from = other.getFrom();
+        this.to = other.getTo();
+    }
+
+    @Override
+    public Task copy() {
+        return new Event(this); // Calls the Event copy constructor
+    }
+
+    public LocalDateTime getFrom() {
+        return from;
+    }
+
+    public LocalDateTime getTo() {
+        return to;
+    }
+
     /**
      * Create new Event object.
      *

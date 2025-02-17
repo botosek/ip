@@ -18,22 +18,23 @@ public class Mom implements Parser {
     private static final String TASKLIST_FILEPATH = "data" + File.separator + "mom.txt";
     private static TaskList taskList;
     private final Storage storage;
-    private final Ui ui;
 
     /**
      * Creates new chatbot Mom tasklist from hard disk.
      */
     public Mom() {
-        ui = new Ui();
         storage = new Storage(TASKLIST_FILEPATH);
         try {
             taskList = new TaskList(storage.load());
+            StateList.addState(taskList);
         } catch (FileNotFoundException e) {
             System.out.println("File not found:\n" + TASKLIST_FILEPATH);
             taskList = new TaskList();
+            StateList.addState(taskList);
         } catch (CorruptedFileException e) {
             System.out.println("Corrupted file:\n" + e);
             taskList = new TaskList();
+            StateList.addState(taskList);
         } catch (IOException e) {
             System.out.println("I/O error:\n" + e);
         }
@@ -56,7 +57,9 @@ public class Mom implements Parser {
             String inputString = (String) parsedInput[1];
             String[] inputList = (String[]) parsedInput[2];
             int offset = (Integer) parsedInput[3];
-            return taskList.handleTaskCommandGui(taskList, command, inputString, inputList, offset);
+            taskList = StateList.getCurrentState();
+            TaskList copyTaskList = new TaskList(taskList);
+            return taskList.handleTaskCommandGui(copyTaskList, command, inputString, inputList, offset);
         } catch (InvalidInputException e) {
             return "Error: " + e.toString();
         } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
