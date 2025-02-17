@@ -3,7 +3,7 @@ package mom.task;
 /**
  * General Task class
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -17,6 +17,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(Task other) {
+        this.description = other.getDescription();
+        this.isDone = other.isDone();
+    }
+
     /**
      * Create new Task object with confirmed completion status.
      *
@@ -26,6 +31,12 @@ public class Task {
     public Task(String description, String status) {
         this.description = description;
         this.isDone = status.equals("1");
+    }
+
+    public abstract Task copy();
+
+    public boolean isDone() {
+        return isDone;
     }
 
     public String getStatusIcon() {

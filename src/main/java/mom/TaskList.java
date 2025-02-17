@@ -27,6 +27,18 @@ public class TaskList implements Parser {
     }
 
     /**
+     * Create copy.
+     *
+     * @param other ArrayList of tasks to be loaded in.
+     */
+    public TaskList(TaskList other) {
+        this.tasks = new ArrayList<>();
+        for (Task task : other.tasks) {
+            this.tasks.add(task.copy()); // Ensure Task has a copy constructor
+        }
+    }
+
+    /**
      * Instantiate new task list if there is no existing task list data.
      */
     public TaskList() {
@@ -49,6 +61,7 @@ public class TaskList implements Parser {
             case todo: {
                 String description = Parser.parseEntryTodo(input, offset);
                 taskList.addTask(new Todo(description));
+                StateList.addState(taskList);
                 break;
             }
             case deadline: {
@@ -56,6 +69,7 @@ public class TaskList implements Parser {
                 String description = (String) result[0];
                 LocalDateTime byDateTime = (LocalDateTime) result[1];
                 taskList.addTask(new Deadline(description, byDateTime));
+                StateList.addState(taskList);
                 break;
             }
             case event: {
@@ -64,6 +78,7 @@ public class TaskList implements Parser {
                 LocalDateTime fromDateTime = (LocalDateTime) results[1];
                 LocalDateTime toDateTime = (LocalDateTime) results[2];
                 taskList.addTask(new Event(description, fromDateTime, toDateTime));
+                StateList.addState(taskList);
                 break;
             }
             default: {
@@ -174,13 +189,21 @@ public class TaskList implements Parser {
      */
     public String handleTaskCommandGui(TaskList taskList, Command command, String input, String[] inputList,
                                        int offset) {
+        StateList.printStates();
         try {
             switch (command) {
             case list: {
+                //return Ui.displayTaskList(taskList);
+                taskList = StateList.getCurrentState();
                 return Ui.displayTaskList(taskList);
+            }
+            case find: {
+                StateList.addState(taskList);
+                return Ui.displayFind(taskList, inputList[1]);
             }
             case mark: {
                 Object[] result = taskList.markTask(input, offset);
+                StateList.addState(taskList);
                 if ((boolean) result[0]) {
                     return Ui.displayMark((Task) result[1]);
                 }
@@ -188,6 +211,7 @@ public class TaskList implements Parser {
             }
             case unmark: {
                 Object[] result = taskList.unmarkTask(input, offset);
+                StateList.addState(taskList);
                 if ((boolean) result[0]) {
                     return Ui.displayUnmark((Task) result[1]);
                 }
@@ -197,10 +221,8 @@ public class TaskList implements Parser {
                 int rank = Integer.parseInt(inputList[1]);
                 String reply = Ui.displayDelete(rank, taskList.getTask(rank), taskList.getSize() - 1);
                 taskList.deleteTask(rank);
+                StateList.addState(taskList);
                 return reply;
-            }
-            case find: {
-                return Ui.displayFind(taskList, inputList[1]);
             }
             default: {
                 return handleTask(taskList, command, input, offset);
@@ -210,5 +232,6 @@ public class TaskList implements Parser {
         } catch (InvalidInputException e) {
             return e.toString();
         }
+
     }
 }

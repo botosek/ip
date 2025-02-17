@@ -24,6 +24,15 @@ public class Todo extends Task {
         super(description, status);
     }
 
+    public Todo(Todo other) {
+        super(other);
+    }
+
+    @Override
+    public Task copy() {
+        return new Todo(this);
+    }
+
     /**
      * Generate string of task to be displayed to user.
      *
