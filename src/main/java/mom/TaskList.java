@@ -147,15 +147,13 @@ public class TaskList implements Parser {
      * Mark task in list.
      *
      * @param input  Raw user input string.
-     * @param offset Offset number of input string where task description starts.
+     * @param rank   Rank of task to be marked.
      */
-    public Object[] markTask(String input, int offset) {
-        for (Task task : this.tasks) {
-            if (task.getDescription().equals(input.substring(offset))) {
-                task.mark();
-
-                return new Object[]{true, task};
-            }
+    public Object[] markTask(String input, int rank) {
+        if (rank <= this.tasks.size()) {
+            this.getTask(rank).mark();
+            Task task = this.getTask(rank);
+            return new Object[]{true, task};
         }
         return new Object[]{false};
     }
@@ -164,15 +162,13 @@ public class TaskList implements Parser {
      * Unmark task in list.
      *
      * @param input  Raw user input string.
-     * @param offset Offset number of input string where task description starts.
+     * @param rank   Rank of task to be unmarked.
      */
-    public Object[] unmarkTask(String input, int offset) {
-        for (Task task : this.tasks) {
-            if (task.getDescription().equals(input.substring(offset))) {
-                task.unmark();
-
-                return new Object[]{true, task};
-            }
+    public Object[] unmarkTask(String input, int rank) {
+        if (rank <= this.tasks.size()) {
+            this.getTask(rank).unmark();
+            Task task = this.getTask(rank);
+            return new Object[]{true, task};
         }
         return new Object[]{false};
     }
@@ -193,7 +189,6 @@ public class TaskList implements Parser {
         try {
             switch (command) {
             case list: {
-                //return Ui.displayTaskList(taskList);
                 taskList = StateList.getCurrentState();
                 return Ui.displayTaskList(taskList);
             }
@@ -202,7 +197,7 @@ public class TaskList implements Parser {
                 return Ui.displayFind(taskList, inputList[1]);
             }
             case mark: {
-                Object[] result = taskList.markTask(input, offset);
+                Object[] result = taskList.markTask(input, Integer.parseInt(inputList[1]));
                 StateList.addState(taskList);
                 if ((boolean) result[0]) {
                     return Ui.displayMark((Task) result[1]);
@@ -210,7 +205,7 @@ public class TaskList implements Parser {
                 break;
             }
             case unmark: {
-                Object[] result = taskList.unmarkTask(input, offset);
+                Object[] result = taskList.unmarkTask(input, Integer.parseInt(inputList[1]));
                 StateList.addState(taskList);
                 if ((boolean) result[0]) {
                     return Ui.displayUnmark((Task) result[1]);
