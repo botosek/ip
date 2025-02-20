@@ -23,6 +23,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setMinHeight(220);
             stage.setMinWidth(417);
+            stage.setTitle("Mom Chatbot");
             fxmlLoader.<MainWindow>getController().setMom(mom);
             stage.show();
         } catch (IOException e) {
