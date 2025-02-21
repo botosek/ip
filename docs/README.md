@@ -1,12 +1,7 @@
 # *Mom* Chatbot User Guide
 
-// Update the title above to match the actual product name
-
-// Product screenshot goes here
-
 ![img.png](img.png)
 
-// Product intro goes here
 
 The Mom chatbot is a simple desktop chatbot app which main purpose is to help you keep track of tasks and deadlines.
 While it has the benefits and appearance of a Graphical User Interface(GUI), it is optimized to be used via a Command
