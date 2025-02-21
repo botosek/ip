@@ -2,7 +2,6 @@
 
 ![img.png](img.png)
 
-
 The Mom chatbot is a simple desktop chatbot app which main purpose is to help you keep track of tasks and deadlines.
 While it has the benefits and appearance of a Graphical User Interface(GUI), it is optimized to be used via a Command
 Line Interface(CLI). The faster you type the faster you can get the Mom chatbot to execute different commands and manage
@@ -42,6 +41,7 @@ Examples:
 - `todo eat bun`
 
 A reply including the task added will be printed out by the chatbot.
+
 ![img_2.png](img_2.png)
 
 ## Adding Deadline tasks: `deadline`
@@ -55,6 +55,7 @@ Examples:
 - `deadline eat bun /by 18/5/2025 1800`
 
 A reply including the task added will be printed out by the chatbot.
+
 ![img_3.png](img_3.png)
 
 ## Adding Event tasks: `event`
@@ -70,6 +71,7 @@ Examples:
 - `event read book /from 17/5/2025 /to 18/5/2025`
 
 A reply including the task added will be printed out by the chatbot.
+
 ![img_4.png](img_4.png)
 
 ## Listing tasks: `list`
@@ -78,6 +80,7 @@ Prints the task list.
 Format: `list`
 
 The task list will be printed out by the chatbot.
+
 ![img_1.png](img_1.png)
 
 ## Mark a task: `mark`
@@ -88,6 +91,7 @@ Format: `mark RANK`
 Example: `mark 1`
 
 A reply including the task marked will be printed out by the chatbot.
+
 ![img_5.png](img_5.png)
 
 ## Unmark a task: `unmark`
@@ -98,6 +102,7 @@ Format: `unmark RANK`
 Example: `unmark 1`
 
 A reply including the task unmarked will be printed out by the chatbot.
+
 ![img_6.png](img_6.png)
 
 ## Delete a task: `delete`
@@ -108,6 +113,7 @@ Format: `delete RANK`
 Example: `delete 1`
 
 A reply including the task deleted will be printed out by the chatbot.
+
 ![img_7.png](img_7.png)
 
 ## Locating a task by keyword: `find`
@@ -120,6 +126,7 @@ Example:
 - `find read book`
 
 All task entries containing the corresponding keyword will be printed out by the chatbot.
+
 ![img_8.png](img_8.png)
 
 ## Undo a command: `undo`
@@ -128,6 +135,7 @@ Reverts the task list to the state before the last command.
 Format: `undo`
 
 The user's `undo` command will not be printed out but the task list will be reverted to the state before the last command and the following reply from the chatbot will appear.
+
 ![img_9.png](img_9.png)
 
 
