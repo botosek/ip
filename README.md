@@ -1,26 +1,169 @@
-# Duke project template
+# *Mom* Chatbot User Guide
+<br>
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+![Ui.png](docs/Ui.png)
+<br>
 
-## Setting up in Intellij
+The Mom chatbot is a simple desktop chatbot app which main purpose is to help you keep track of tasks and deadlines.
+While it has the benefits and appearance of a Graphical User Interface(GUI), it is optimized to be used via a Command
+Line Interface(CLI). The faster you type the faster you can get the Mom chatbot to execute different commands and manage
+your to do list faster!
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+---
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+## How to Start
+
+1. Ensure that you have Java 17 installed on your computer.
+2. Download the latest `.jar` release file of the Mom chatbot. If you want the `.jar` file to run and your tasklist file to
+   be stored in a specific folder, copy the file to the desired folder.
+
+# Features
+<details>
+<summary>Notes about the command format:</summary>
+
+- Words in `UPPER_CASE` are the parameters to be supplied by the user.
+
+  e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo read book`.
+- Items in square brackets are optional.
+
+  e.g `DATE [TIME]` can be used as `18/5/2025` or `18/5/2025 5pm`.
+- Helping words like `/from`, `/to`, `/by` are to be supplied by the user.
+- Extraneous parameters for commands that do not take in parameters (such as `list`, `undo`) will be ignored.
+
+</details>
+
+## Adding Todo tasks: `todo`
+Adds a todo type task to the task list.
+
+Format: `todo DESCRIPTION`
+
+Examples:
+- `todo read book`
+- `todo eat bun`
+
+A reply including the task added will be printed out by the chatbot.
+<br>
+![todo.png](docs/todoExample.png)
+<br>
+## Adding Deadline tasks: `deadline`
+Adds a deadline type task to the task list. If no time is specified, the time is set by default to 00:00.
+
+Format:
+- `deadline DESCRIPTION /by DATE [TIME]`
+
+Examples:
+- `deadline read book /by 18/5/2025 `
+- `deadline eat bun /by 18/5/2025 1800`
+
+A reply including the task added will be printed out by the chatbot.
+<br>
+![deadline.png](docs/deadlineExample.png)
+<br>
+## Adding Event tasks: `event`
+Adds an event type task to the task list. If no time is specified, the time is set by default to 00:00.
+
+Format:
+- `event DESCRIPTION /from DATE [TIME] /to DATE [TIME]`
+
+Examples:
+- `event read book /from 17/5/2025 2pm /to 18/5/2025 1700`
+- `event read book /from 17/5/2025 2pm /to 18/5/2025`
+- `event read book /from 17/5/2025 /to 18/5/2025 1700`
+- `event read book /from 17/5/2025 /to 18/5/2025`
+
+A reply including the task added will be printed out by the chatbot.
+<br>
+![event.png](docs/eventExample.png)
+<br>
+## Listing tasks: `list`
+Prints the task list.
+
+Format: `list`
+
+The task list will be printed out by the chatbot.
+<br>
+![list.png](docs/listExample.png)
+<br>
+## Mark a task: `mark`
+Marks a task as complete. If the task has already been marked as complete, the task status will remain as complete.
+
+Format: `mark RANK`
+
+Example: `mark 1`
+
+A reply including the task marked will be printed out by the chatbot.
+<br>
+![mark.png](docs/markExample.png)
+<br>
+## Unmark a task: `unmark`
+Unmarks a task as incomplete. If the task has already been marked as incomplete, the task status will remain as incomplete.
+
+Format: `unmark RANK`
+
+Example: `unmark 1`
+
+A reply including the task unmarked will be printed out by the chatbot.
+<br>
+![unmark.png](docs/unmarkExample.png)
+<br>
+## Delete a task: `delete`
+Deletes a task in the task list given the rank of the task in the task list.
+
+Format: `delete RANK`
+
+Example: `delete 1`
+
+A reply including the task deleted will be printed out by the chatbot.
+<br>
+![delete.png](docs/deleteExample.png)
+<br>
+## Locating a task by keyword: `find`
+Finds existing tasks with the corresponding keyword in the description. If no corresponding task is found, no tasks will be printed.
+
+Format: `find KEYWORD`
+
+Example:
+- `find book`
+- `find read book`
+
+All task entries containing the corresponding keyword will be printed out by the chatbot.
+<br>
+![find.png](docs/findExample.png)
+<br>
+## Undo a command: `undo`
+Reverts the task list to the state before the last command. This command does not apply to the `list` and `find` commands as they do not change the task list.
+
+Format: `undo`
+
+The user's `undo` command will not be printed out but the task list will be reverted to the state before the last command and the following reply from the chatbot will appear.
+<br>
+![undo.png](docs/undoExample.png)
+<br>
+
+## Exit the chatbot program: `bye`
+Saves the current task file to the hard disk and closes the chatbot window.
+
+Format: `bye`
+
+## Saving the data
+The task list data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+## Loading the data
+The task list data is loaded from the hard disk automatically when the chatbot is started. If there is no existing data file, a new data file will be created.
+
+---
+# Command Summary
+
+| Command  | Format                                                | Example                                                  |
+|----------|-------------------------------------------------------|----------------------------------------------------------|
+| todo     | `todo DESCRIPTION`                                    | `todo read book`                                         |
+| deadline | `deadline DESCRIPTION /by DATE [TIME]`                | `deadline read book /by 18/5/2025`                       |
+| event    | `event DESCRIPTION /from DATE [TIME] /to DATE [TIME]` | `event read book /from 17/5/2025 2pm /to 18/5/2025 1700` |
+| list     | `list`                                                | `list`                                                   |
+| mark     | `mark RANK`                                           | `mark 1`                                                 |
+| unmark   | `unmark RANK`                                         | `unmark 1`                                               |
+| delete   | `delete RANK`                                         | `delete 1`                                               |
+| find     | `find KEYWORD`                                        | `find book`                                              |
+| undo     | `undo`                                                | `undo`                                                   |
+| bye      | `bye`                                                 | `bye`                                                    |
