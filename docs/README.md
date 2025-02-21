@@ -23,83 +23,141 @@ your to do list faster!
 be stored in a specific folder, copy the file to the desired folder.
 
 # Features
+<details>
+<summary>Notes about the command format:</summary>
 
+- Words in `UPPER_CASE` are the parameters to be supplied by the user.
 
-## Adding Todos
+  e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo read book`.
+- Items in square brackets are optional.
+
+    e.g `DATE [TIME]` can be used as `18/5/2025` or `18/5/2025 5pm`.
+- Helping words like `/from`, `/to`, `/by` are to be supplied by the user.
+- Extraneous parameters for commands that do not take in parameters (such as `list`, `undo`) will be ignored.
+
+</details>
+
+## Adding Todo tasks: `todo`
 Adds a todo type task to the task list.
 
-Format: `todo {DESCRIPTION}`
+Format: `todo DESCRIPTION`
 
 Examples:
 - `todo read book`
 - `todo eat bun`
 
+A reply including the task added will be printed out by the chatbot.
+![img_2.png](img_2.png)
 
-## Adding Deadlines
+## Adding Deadline tasks: `deadline`
 Adds a deadline type task to the task list. If no time is specified, the time is set by default to 00:00.
 
 Format: 
-- `deadline {DESCRIPTION} /by {DATE} {TIME}`
-- `deadline {DESCRIPTION} /by {DATE}`
+- `deadline DESCRIPTION /by DATE [TIME]`
 
 Examples:
 - `deadline read book /by 18/5/2025 `
-- `deadline eat bun /by 18/5/2025 5pm`
+- `deadline eat bun /by 18/5/2025 1800`
 
-## Adding events
+A reply including the task added will be printed out by the chatbot.
+![img_3.png](img_3.png)
+
+## Adding Event tasks: `event`
 Adds an event type task to the task list. If no time is specified, the time is set by default to 00:00.
 
 Format:
-- `event {DESCRIPTION} /from {DATE} {TIME} /to {DATE} {TIME}`
-- `event {DESCRIPTION} /from {DATE} {TIME} /to {DATE}`
-- `event {DESCRIPTION} /from {DATE} /to {DATE} {TIME}`
-- `event {DESCRIPTION} /from {DATE} /to {DATE}`
+- `event DESCRIPTION /from DATE [TIME] /to DATE [TIME]`
 
 Examples:
-- `event read book /from 17/5/2025 2pm /to 18/5/2025 5pm`
+- `event read book /from 17/5/2025 2pm /to 18/5/2025 1700`
 - `event read book /from 17/5/2025 2pm /to 18/5/2025`
-- `event read book /from 17/5/2025 /to 18/5/2025 5pm`
+- `event read book /from 17/5/2025 /to 18/5/2025 1700`
 - `event read book /from 17/5/2025 /to 18/5/2025`
 
-## Listing task
+A reply including the task added will be printed out by the chatbot.
+![img_4.png](img_4.png)
+
+## Listing tasks: `list`
 Prints the task list.
 
 Format: `list`
 
-Example: `list`
+The task list will be printed out by the chatbot.
+![img_1.png](img_1.png)
 
-## Mark task
+## Mark a task: `mark`
 Marks a task as complete. If the task has already been marked as complete, the task status will remain as complete.
 
-## Unmark task
-Unmarks a task as incomplete. If the task has already been marked as incomplete, the task status will remain as
-incomplete.
+Format: `mark RANK`
 
-## Delete task
+Example: `mark 1`
+
+A reply including the task marked will be printed out by the chatbot.
+![img_5.png](img_5.png)
+
+## Unmark a task: `unmark`
+Unmarks a task as incomplete. If the task has already been marked as incomplete, the task status will remain as incomplete.
+
+Format: `unmark RANK`
+
+Example: `unmark 1`
+
+A reply including the task unmarked will be printed out by the chatbot.
+![img_6.png](img_6.png)
+
+## Delete a task: `delete`
 Deletes a task in the task list given the rank of the task in the task list.
 
-## Undo command
-Reverts the task list to the state before the last command(this does not apply to the list command as the list command
-does not make any changes to the task list).
+Format: `delete RANK`
+
+Example: `delete 1`
+
+A reply including the task deleted will be printed out by the chatbot.
+![img_7.png](img_7.png)
+
+## Locating a task by keyword: `find`
+Finds existing tasks with the corresponding keyword in the description. If no corresponding task is found, no tasks will be printed.
+
+Format: `find KEYWORD`
+
+Example: 
+- `find book`
+- `find read book`
+
+All task entries containing the corresponding keyword will be printed out by the chatbot.
+![img_8.png](img_8.png)
+
+## Undo a command: `undo`
+Reverts the task list to the state before the last command.
+
+Format: `undo`
+
+The user's `undo` command will not be printed out but the task list will be reverted to the state before the last command and the following reply from the chatbot will appear.
+![img_9.png](img_9.png)
 
 
-// Describe the action and its outcome.
+## Exit the chatbot program: `bye`
+Saves the current task file to the hard disk and closes the chatbot window.
 
-// Give examples of usage
+Format: `bye`
 
-Example: `keyword (optional arguments)`
+## Saving the data
+The task list data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-// A description of the expected outcome goes here
+## Loading the data
+The task list data is loaded from the hard disk automatically when the chatbot is started. If there is no existing data file, a new data file will be created.
 
-```
-expected output
-```
-
-## Feature ABC
-
-// Feature details
-
-
-## Feature XYZ
-
-// Feature details
+---
+# Command Summary
+| Command | Format | Example |
+| --- | --- | --- |
+| todo | `todo DESCRIPTION` | `todo read book` |
+| deadline | `deadline DESCRIPTION /by DATE [TIME]` | `deadline read book /by 18/5/2025` |
+| event | `event DESCRIPTION /from DATE [TIME] /to DATE [TIME]` | `event read book /from 17/5/2025 2pm /to 18/5/2025 1700` |
+| list | `list` | `list` |
+| mark | `mark RANK` | `mark 1` |
+| unmark | `unmark RANK` | `unmark 1` |
+| delete | `delete RANK` | `delete 1` |
+| find | `find KEYWORD` | `find book` |
+| undo | `undo` | `undo` |
+| bye | `bye` | `bye` |
