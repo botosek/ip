@@ -152,15 +152,15 @@ The task list data is loaded from the hard disk automatically when the chatbot i
 
 ---
 # Command Summary
-| Command | Format | Example |
-| --- | --- | --- |
-| todo | `todo DESCRIPTION` | `todo read book` |
-| deadline | `deadline DESCRIPTION /by DATE [TIME]` | `deadline read book /by 18/5/2025` |
-| event | `event DESCRIPTION /from DATE [TIME] /to DATE [TIME]` | `event read book /from 17/5/2025 2pm /to 18/5/2025 1700` |
-| list | `list` | `list` |
-| mark | `mark RANK` | `mark 1` |
-| unmark | `unmark RANK` | `unmark 1` |
-| delete | `delete RANK` | `delete 1` |
-| find | `find KEYWORD` | `find book` |
-| undo | `undo` | `undo` |
-| bye | `bye` | `bye` |
+| Command  | Format                                                | Example                                                  |
+|----------|-------------------------------------------------------|----------------------------------------------------------|
+| todo     | `todo DESCRIPTION`                                    | `todo read book`                                         |
+| deadline | `deadline DESCRIPTION /by DATE [TIME]`                | `deadline read book /by 18/5/2025`                       |
+| event    | `event DESCRIPTION /from DATE [TIME] /to DATE [TIME]` | `event read book /from 17/5/2025 2pm /to 18/5/2025 1700` |
+| list     | `list`                                                | `list`                                                   |
+| mark     | `mark RANK`                                           | `mark 1`                                                 |
+| unmark   | `unmark RANK`                                         | `unmark 1`                                               |
+| delete   | `delete RANK`                                         | `delete 1`                                               |
+| find     | `find KEYWORD`                                        | `find book`                                              |
+| undo     | `undo`                                                | `undo`                                                   |
+| bye      | `bye`                                                 | `bye`                                                    |
