@@ -40,7 +40,6 @@ public class StateList {
      * Get the current state.
      */
     public static TaskList getCurrentState() {
-        System.out.println("Current State: " + StateList.currentState);
         return states.get(currentState - 1);
     }
 
@@ -49,9 +48,9 @@ public class StateList {
      */
     public static void printStates() {
         System.out.println("All States:");
-        for (int i = 0; i < states.size(); i++) {
-            for (int j = 0; j < states.get(i).getSize(); j++) {
-                System.out.println("Task " + j + ": " + states.get(i).getTask(j + 1));
+        for (TaskList state : states) {
+            for (int j = 0; j < state.getSize(); j++) {
+                System.out.println("Task " + j + ": " + state.getTask(j + 1));
             }
         }
         System.out.println("Current State Pointer: " + currentState);

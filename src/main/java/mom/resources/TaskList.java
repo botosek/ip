@@ -185,7 +185,6 @@ public class TaskList implements Parser {
      */
     public String handleTaskCommandGui(TaskList taskList, Command command, String input, String[] inputList,
                                        int offset) {
-        StateList.printStates();
         try {
             switch (command) {
             case list: {
