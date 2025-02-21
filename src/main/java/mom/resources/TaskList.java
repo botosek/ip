@@ -1,5 +1,5 @@
 
-package mom;
+package mom.resources;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

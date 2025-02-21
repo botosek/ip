@@ -1,4 +1,4 @@
-package mom;
+package mom.resources;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import mom.Mom;
 import mom.exceptions.CorruptedFileException;
 import mom.task.Deadline;
 import mom.task.Event;

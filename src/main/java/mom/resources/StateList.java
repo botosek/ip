@@ -1,4 +1,4 @@
-package mom;
+package mom.resources;
 
 import java.util.ArrayList;
 

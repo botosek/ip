@@ -7,6 +7,10 @@ import java.io.IOException;
 import mom.command.Command;
 import mom.exceptions.CorruptedFileException;
 import mom.exceptions.InvalidInputException;
+import mom.resources.Parser;
+import mom.resources.StateList;
+import mom.resources.Storage;
+import mom.resources.TaskList;
 
 /**
  * Main class that runs the chatbot "Mom".

@@ -1,4 +1,4 @@
-package mom;
+package mom.resources;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
