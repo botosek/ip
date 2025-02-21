@@ -152,6 +152,7 @@ The task list data is loaded from the hard disk automatically when the chatbot i
 
 ---
 # Command Summary
+# Command Summary
 | Command  | Format                                                | Example                                                  |
 |----------|-------------------------------------------------------|----------------------------------------------------------|
 | todo     | `todo DESCRIPTION`                                    | `todo read book`                                         |
