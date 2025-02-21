@@ -1,7 +1,9 @@
 # *Mom* Chatbot User Guide
 <br>
-![img.png](img.png)
+
+![Ui.png](Ui.png)
 <br>
+
 The Mom chatbot is a simple desktop chatbot app which main purpose is to help you keep track of tasks and deadlines.
 While it has the benefits and appearance of a Graphical User Interface(GUI), it is optimized to be used via a Command
 Line Interface(CLI). The faster you type the faster you can get the Mom chatbot to execute different commands and manage
@@ -42,7 +44,7 @@ Examples:
 
 A reply including the task added will be printed out by the chatbot.
 <br>
-![img_2.png](img_2.png)
+![todo.png](todoExample.png)
 <br>
 ## Adding Deadline tasks: `deadline`
 Adds a deadline type task to the task list. If no time is specified, the time is set by default to 00:00.
@@ -56,7 +58,7 @@ Examples:
 
 A reply including the task added will be printed out by the chatbot.
 <br>
-![img_3.png](img_3.png)
+![deadline.png](deadlineExample.png)
 <br>
 ## Adding Event tasks: `event`
 Adds an event type task to the task list. If no time is specified, the time is set by default to 00:00.
@@ -72,7 +74,7 @@ Examples:
 
 A reply including the task added will be printed out by the chatbot.
 <br>
-![img_4.png](img_4.png)
+![event.png](eventExample.png)
 <br>
 ## Listing tasks: `list`
 Prints the task list.
@@ -81,7 +83,7 @@ Format: `list`
 
 The task list will be printed out by the chatbot.
 <br>
-![img_1.png](img_1.png)
+![list.png](listExample.png)
 <br>
 ## Mark a task: `mark`
 Marks a task as complete. If the task has already been marked as complete, the task status will remain as complete.
@@ -92,7 +94,7 @@ Example: `mark 1`
 
 A reply including the task marked will be printed out by the chatbot.
 <br>
-![img_5.png](img_5.png)
+![mark.png](markExample.png)
 <br>
 ## Unmark a task: `unmark`
 Unmarks a task as incomplete. If the task has already been marked as incomplete, the task status will remain as incomplete.
@@ -103,7 +105,7 @@ Example: `unmark 1`
 
 A reply including the task unmarked will be printed out by the chatbot.
 <br>
-![img_6.png](img_6.png)
+![unmark.png](unmarkExample.png)
 <br>
 ## Delete a task: `delete`
 Deletes a task in the task list given the rank of the task in the task list.
@@ -114,7 +116,7 @@ Example: `delete 1`
 
 A reply including the task deleted will be printed out by the chatbot.
 <br>
-![img_7.png](img_7.png)
+![delete.png](deleteExample.png)
 <br>
 ## Locating a task by keyword: `find`
 Finds existing tasks with the corresponding keyword in the description. If no corresponding task is found, no tasks will be printed.
@@ -127,16 +129,16 @@ Example:
 
 All task entries containing the corresponding keyword will be printed out by the chatbot.
 <br>
-![img_8.png](img_8.png)
+![find.png](findExample.png)
 <br>
 ## Undo a command: `undo`
-Reverts the task list to the state before the last command.
+Reverts the task list to the state before the last command. This command does not apply to the `list` and `find` commands as they do not change the task list.
 
 Format: `undo`
 
 The user's `undo` command will not be printed out but the task list will be reverted to the state before the last command and the following reply from the chatbot will appear.
 <br>
-![img_9.png](img_9.png)
+![undo.png](undoExample.png)
 <br>
 
 ## Exit the chatbot program: `bye`
@@ -151,7 +153,6 @@ The task list data is saved in the hard disk automatically after any command tha
 The task list data is loaded from the hard disk automatically when the chatbot is started. If there is no existing data file, a new data file will be created.
 
 ---
-# Command Summary
 # Command Summary
 | Command  | Format                                                | Example                                                  |
 |----------|-------------------------------------------------------|----------------------------------------------------------|

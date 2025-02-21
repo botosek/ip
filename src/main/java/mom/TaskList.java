@@ -193,7 +193,6 @@ public class TaskList implements Parser {
                 return Ui.displayTaskList(taskList);
             }
             case find: {
-                StateList.addState(taskList);
                 return Ui.displayFind(taskList, inputList[1]);
             }
             case mark: {

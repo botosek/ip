@@ -64,7 +64,7 @@ public class MainWindow extends AnchorPane {
         } else if (input.equals("undo")) {
             StateList.undo();
             String response = Ui.displayUndo();
-            dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage, Command.regular));
+            dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage), DialogBox.getDukeDialog(response, dukeImage, Command.regular));
             userInput.clear();
         } else {
             String response = mom.getResponse(input);
